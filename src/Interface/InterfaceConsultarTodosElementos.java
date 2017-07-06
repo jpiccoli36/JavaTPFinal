@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.ControladorElementos;
+import Datos.DatosElementos;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -19,6 +20,7 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	ControladorElementos control = new ControladorElementos();
+	DatosElementos de = new DatosElementos();
 
 	/**
 	 * Launch the application.
@@ -77,7 +79,7 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 
 	protected void buscarClick() {
 		
-		control.consulta();
+		de.consulta();
 		
 	}
 

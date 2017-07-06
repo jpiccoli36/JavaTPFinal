@@ -3,6 +3,7 @@ package ABMCTipos;
 import java.util.Scanner;
 
 import Controlador.ControladorElementos;
+import Datos.DatosElementos;
 import Elementos.Elemento;
 
 public class ABMCTipos {
@@ -10,6 +11,7 @@ public class ABMCTipos {
 	ControladorElementos ctr;
 
 	public void start() {
+		
 		ctr = new ControladorElementos();
 
 		String rta = "s";
@@ -57,6 +59,7 @@ public class ABMCTipos {
 	}
 
 	private void consulta() {
+		DatosElementos de = new DatosElementos();
 		int r;
 		Elemento e = new Elemento();
 		System.out.println("1-todos");
@@ -65,7 +68,7 @@ public class ABMCTipos {
 		r = Integer.parseInt(s.nextLine());
 		switch (r) {
 		case 1:
-			ctr.consulta();
+			de.consulta();
 
 			break;
 		case 2:
@@ -102,4 +105,5 @@ public class ABMCTipos {
 		ctr.Alta(e);
 
 	}
+	
 }

@@ -47,9 +47,7 @@ public class MainInterface extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+
 	public MainInterface() {
 		setTitle("Reservas Elementos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

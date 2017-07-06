@@ -2,14 +2,18 @@ package Controlador;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Datos.DatosElementos;
 import Elementos.Elemento;
 
 public class ControladorElementos {
+	private DatosElementos de;
+
 	Scanner w = new Scanner(System.in);
-	ArrayList<Elemento> el = new ArrayList<Elemento>();
+	private ArrayList<Elemento> el = new ArrayList<Elemento>();
 
 	public ControladorElementos() {
-
+		de = new DatosElementos();
 		el.add(new Elemento("cochera", 1, 2));
 		el.add(new Elemento("salon", 3, 4));
 	}
@@ -43,13 +47,19 @@ public class ControladorElementos {
 
 	}
 
+	public void SelectTodosBD(ArrayList<Elemento> e) {
+		for (Elemento el : e) {
+			System.out.println("Nombre: " + el.getNombre_elemento() + "\n" + "cant: " + el.getCantidad_elemento() + "\n" + "ID: "
+					+ el.getId_elemento() );
+	
+	}
+		}
 	public void consulta() {
 		for (Elemento elemen : el) {
-			System.out.println("Nombre: " + elemen.getNombre_elemento() + "\n" + "Id Elemento: "
-					+ elemen.getId_elemento() + "\n" + "Cantidad Elemento: " + elemen.getCantidad_elemento());
-
+			System.out.println("Nombre: " + elemen.getNombre_elemento() + "\n" + "cant: " + elemen.getCantidad_elemento() + "\n" + "ID: "
+					+ elemen.getId_elemento() );
 		}
-	}
+		}
 
 	public void Alta(Elemento e) {
 
@@ -57,7 +67,7 @@ public class ControladorElementos {
 	}
 
 	public void Baja(int id) {
-		
+
 		for (Elemento elem : el) {
 			if (elem.getId_elemento() == id) {
 				el.remove(elem);

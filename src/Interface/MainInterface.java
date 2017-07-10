@@ -4,25 +4,25 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 import javax.swing.JDesktopPane;
 import java.awt.Color;
-import java.awt.Component;
+
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 public class MainInterface extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenu mnElementos;
 	private JDesktopPane desktopPane;
-	private Component fmrElemento;
+	
 	private JMenuItem mntmAlta;
 	private JMenuItem mntmConsultarTodos;
 	private JMenu mnAsd;
@@ -31,9 +31,6 @@ public class MainInterface extends JFrame {
 	private JMenuItem mntmModificar;
 	private JMenuItem mntmBuscarPorNombre;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

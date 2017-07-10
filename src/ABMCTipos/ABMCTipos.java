@@ -68,7 +68,7 @@ public class ABMCTipos {
 		r = Integer.parseInt(s.nextLine());
 		switch (r) {
 		case 1:
-			de.consulta();
+			//de.consulta();
 
 			break;
 		case 2:

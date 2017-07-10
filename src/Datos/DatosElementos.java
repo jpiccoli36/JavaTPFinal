@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -71,9 +72,9 @@ public class DatosElementos {
 		try {
 			stmt =FactoryConexion.getInstancia().getConn().prepareStatement("insert into elementos(NombreElemento,CantidadElementos) values (?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1,e.getNombre_elemento());
-			stmt.setInt(2, e.getCantidad_elemento());		
+			stmt.setInt(2, e.getCantidad_elemento());			
+			int resp =stmt.executeUpdate();
 			
-			stmt.executeUpdate();
 			rs=stmt.getGeneratedKeys();
 			if(rs!=null && rs.next()){
 				e.setId_elemento(rs.getInt(1));

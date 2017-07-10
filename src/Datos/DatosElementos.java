@@ -17,6 +17,7 @@ import Interface.InterfaceConsultarTodosElementos;
 
 public class DatosElementos {
 	
+	
 	public  ResultSet ConsultaTodos(){
 		ResultSet rs = null;
 		
@@ -31,6 +32,9 @@ public class DatosElementos {
 		return rs;
 	}
 	public ResultSet ConsultaID(int id){
+		return ConsultaIDElementos(id);
+	}
+	public ResultSet ConsultaIDElementos(int id){
 		java.sql.PreparedStatement stmt =null;
 		ResultSet rs = null;
 		
@@ -44,7 +48,7 @@ public class DatosElementos {
 		}		
 		return rs;
 	}
-	public ResultSet ConsultaNombre(String Nombre){
+	public ResultSet ConsultaNombreElementos(String Nombre){
 		java.sql.PreparedStatement stmt =null;
 		ResultSet rs = null;
 		
@@ -58,5 +62,30 @@ public class DatosElementos {
 		}		
 		return rs;
 	}
+	
+	public void AltaElementos(Elemento e){
+		
+		java.sql.PreparedStatement stmt =null;
+		ResultSet rs = null;
+		
+		try {
+			stmt =FactoryConexion.getInstancia().getConn().prepareStatement("insert into elementos(NombreElemento,CantidadElementos) values (?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1,e.getNombre_elemento());
+			stmt.setInt(2, e.getCantidad_elemento());		
+			
+			stmt.executeUpdate();
+			rs=stmt.getGeneratedKeys();
+			if(rs!=null && rs.next()){
+				e.setId_elemento(rs.getInt(1));
+			}		
+			
+		} catch (SQLException s) {
+			
+			s.printStackTrace();
+		}		
+		
+		
+	
 
 }
+	}

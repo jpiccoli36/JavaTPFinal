@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.ControladorElementos;
+import Datos.DatosElementos;
 import Elementos.Elemento;
 
 import javax.swing.GroupLayout;
@@ -18,14 +19,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JDesktopPane;
+import java.awt.Color;
 
 public class InterfaceAltaElementos extends JInternalFrame {
 
 	private JPanel contentPane;
-	private JTextField tfNombre;
-	private JTextField tfIDElemento;
-	private JTextField tfCantidad;
 	ControladorElementos control= new ControladorElementos();
+	private JTextField tfNombreElemento;
+	private JTextField tfCantidadElemento;
 
 	/**
 	 * Launch the application.
@@ -52,92 +54,70 @@ public class InterfaceAltaElementos extends JInternalFrame {
 		setTitle("Alta Elementos");
 		setMaximizable(true);
 		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 317, 231);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
 		JLabel lblNombreElemento = new JLabel("Nombre Elemento");
 		
-		JLabel lblIdElemento = new JLabel("ID Elemento");
+		tfNombreElemento = new JTextField();
+		tfNombreElemento.setColumns(10);
 		
 		JLabel lblCantidadElemento = new JLabel("Cantidad Elemento");
 		
-		tfNombre = new JTextField();
-		tfNombre.setColumns(10);
+		tfCantidadElemento = new JTextField();
+		tfCantidadElemento.setColumns(10);
 		
-		tfIDElemento = new JTextField();
-		tfIDElemento.setColumns(10);
-		
-		tfCantidad = new JTextField();
-		tfCantidad.setColumns(10);
-		
-		JButton btnAgregar = new JButton("agregar");
+		JButton btnAgregar = new JButton("Agregar");
 		btnAgregar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				agregarclick();
+			
+			public void mouseClicked(MouseEvent arg0) {
+				AltaClick();
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(44)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnAgregar)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(27)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblCantidadElemento)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(tfCantidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNombreElemento)
-										.addComponent(lblIdElemento))
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
+							.addComponent(lblCantidadElemento)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(82)
-							.addComponent(btnAgregar)))
-					.addContainerGap(209, Short.MAX_VALUE))
+							.addComponent(lblNombreElemento)
+							.addGap(18)
+							.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(192, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(43)
+					.addGap(38)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNombreElemento)
-						.addComponent(tfNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblIdElemento)
-						.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblCantidadElemento)
-						.addComponent(tfCantidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(43)
+						.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(52)
 					.addComponent(btnAgregar)
-					.addContainerGap(62, Short.MAX_VALUE))
+					.addContainerGap(89, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	
-	protected void agregarclick() {
+	protected void AltaClick() {
 		Elemento e = new Elemento();
-		e.setNombre_elemento(this.tfNombre.getText());
-		int id = Integer.parseInt(tfIDElemento.getText());
+		DatosElementos de = new DatosElementos();
+		e.setNombre_elemento(tfNombreElemento.getText());
+		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));
+		de.AltaElementos(e);
 		
-		int cant = Integer.parseInt(tfCantidad.getText());
-		
-		control.Alta(e);
 		
 	}
-
-	
-
 }

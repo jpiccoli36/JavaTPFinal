@@ -14,8 +14,7 @@ public class ControladorElementos {
 
 	public ControladorElementos() {
 		de = new DatosElementos();
-		el.add(new Elemento("cochera", 1, 2));
-		el.add(new Elemento("salon", 3, 4));
+		
 	}
 
 	public Elemento Porid(Elemento e) {

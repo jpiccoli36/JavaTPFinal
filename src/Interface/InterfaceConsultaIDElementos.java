@@ -120,7 +120,7 @@ public class InterfaceConsultaIDElementos extends JInternalFrame {
 		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});
 		DatosElementos da= new DatosElementos();	
 		int id= Integer.parseInt(tfIdElemento.getText());
-			ResultSet rs=da.ConsultaID(id);
+			ResultSet rs=da.ConsultaIDElementos(id);
 				if(rs!=null ){
 					try {
 						while(rs.next()){

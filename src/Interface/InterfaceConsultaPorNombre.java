@@ -108,7 +108,7 @@ public class InterfaceConsultaPorNombre extends JInternalFrame {
 		dfm.setColumnIdentifiers(new Object[] { "ID", "Nombre", "Cantidad" });
 		DatosElementos da = new DatosElementos();
 		String Nombre = tfNombreElemento.getText();
-		ResultSet rs = da.ConsultaNombre(Nombre);
+		ResultSet rs = da.ConsultaNombreElementos(Nombre);
 		if (rs != null) {
 			try {
 				while (rs.next()) {

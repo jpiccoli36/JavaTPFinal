@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -30,29 +31,15 @@ public class ControladorElementos {
 
 	}
 
-	public ArrayList<Elemento> PorNombre(String n) {
+	public void PorNombre(String n) {
+ de.ConsultaNombreElementos(n);
 
-		for (Elemento elemen : el) {
-			if (elemen.getNombre_elemento().equals(n)) {
-
-				System.out.println("Nombre: " + elemen.getNombre_elemento() + "\nCantidad Elemento: "
-						+ elemen.getCantidad_elemento() + "\nId Elemento " + elemen.getId_elemento());
-				break;
-
-			}
-		}
-
-		return el;
-
-	}
+}
 
 	public void SelectTodosBD(ArrayList<Elemento> e) {
-		for (Elemento el : e) {
-			System.out.println("Nombre: " + el.getNombre_elemento() + "\n" + "cant: " + el.getCantidad_elemento() + "\n" + "ID: "
-					+ el.getId_elemento() );
-	
+ de.ConsultaTodos();
 	}
-		}
+		
 	public void consulta() {
 		for (Elemento elemen : el) {
 			System.out.println("Nombre: " + elemen.getNombre_elemento() + "\n" + "cant: " + elemen.getCantidad_elemento() + "\n" + "ID: "
@@ -62,23 +49,18 @@ public class ControladorElementos {
 
 	public void Alta(Elemento e) {
 
-		el.add(e);
+		de.AltaElementos(e);
 	}
 
-	public void Baja(int id) {
+	public void Baja(Elemento s) {
 
-		for (Elemento elem : el) {
-			if (elem.getId_elemento() == id) {
-				el.remove(elem);
-				break;
-			}
-		}
+		 de.BajaElementos(s);
 
 	}
 
 	public void Modifica(Elemento e) {
-		this.Baja(e.getId_elemento());
-		this.Alta(e);
+		DatosElementos de = new DatosElementos();
+		de.Modificar(e);
 
 	}
 

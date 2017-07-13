@@ -113,10 +113,13 @@ public class InterfaceAltaElementos extends JInternalFrame {
 
 	protected void AltaClick() {
 		Elemento e = new Elemento();
-		DatosElementos de = new DatosElementos();
+		ControladorElementos ce = new ControladorElementos();
+		
 		e.setNombre_elemento(tfNombreElemento.getText());
 		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));
-		de.AltaElementos(e);
+		ce.Alta(e);
+		
+	
 		
 		
 	}

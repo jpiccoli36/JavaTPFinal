@@ -167,7 +167,7 @@ public class ABMCInterface extends JInternalFrame {
 
 	protected void bajaClick() {
 		int id = Integer.parseInt(tFIdElemento.getText());
-		ctr.Baja(id);
+		//ctr.Baja(id);
 
 	}
 

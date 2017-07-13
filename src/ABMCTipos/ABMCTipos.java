@@ -36,7 +36,7 @@ public class ABMCTipos {
 			case "b":
 				System.out.println("Ingrese el Id del Elemento");
 				int id = Integer.parseInt(s.nextLine());
-				ctr.Baja(id);
+				//ctr.Baja(id);
 				System.out.println("hacer otra accion Si(s)-No(n)?"); // listo
 				rta = s.nextLine();
 				break;

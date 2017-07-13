@@ -1,7 +1,7 @@
 package Elementos;
 
 public class Elemento {
-
+/*hola*/
 	int id_elemento;
 
 	public Elemento() {

@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class MainInterface extends JFrame {
 	/**
-	 * hola
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private JMenu mnElementos;

@@ -1,18 +1,18 @@
-package ABMCTipos;
+package ABMC;
 
 import java.util.Scanner;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
-import Elementos.Elemento;
+import Entidades.Elemento;
 
 public class ABMCTipos {
 	Scanner s = new Scanner(System.in);
-	ControladorElementos ctr;
+	Controlador ctr;
 
 	public void start() {
 		
-		ctr = new ControladorElementos();
+		ctr = new Controlador();
 
 		String rta = "s";
 

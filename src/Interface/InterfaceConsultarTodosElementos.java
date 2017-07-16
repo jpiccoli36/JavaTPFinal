@@ -8,11 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
 import Datos.FactoryConexion;
-import Elementos.Elemento;
-
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -50,7 +49,7 @@ import javax.swing.JScrollPane;
 public class InterfaceConsultarTodosElementos extends JInternalFrame {
 
 	private JPanel contentPane;
-	ControladorElementos control = new ControladorElementos();
+	Controlador control = new Controlador();
 	DatosElementos de = new DatosElementos();
 	private JTable table;
 

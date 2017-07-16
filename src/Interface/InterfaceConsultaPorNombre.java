@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
 
 import javax.swing.GroupLayout;
@@ -26,7 +26,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class InterfaceConsultaPorNombre extends JInternalFrame {
-	ControladorElementos control = new ControladorElementos();
+	Controlador control = new Controlador();
 	private JPanel contentPane;
 	private JTextField tfNombreElemento;
 	private JTable table;

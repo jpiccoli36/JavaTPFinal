@@ -7,9 +7,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
-import Elementos.Elemento;
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -44,7 +44,7 @@ import java.awt.event.ActionEvent;
 
 public class InterfaceModificacionElementos extends JInternalFrame {
 
-	ControladorElementos control = new ControladorElementos();
+	Controlador control = new Controlador();
 	private JPanel contentPane;
 	private JTextField tfNombreElemento;
 	private JTextField tfCantidadElemento;

@@ -7,8 +7,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.ControladorElementos;
-import Elementos.Elemento;
+import Controlador.Controlador;
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 public class ABMCInterface extends JInternalFrame {
 
 	private JPanel contentPane;
-	private ControladorElementos ctr = new ControladorElementos();
+	private Controlador ctr = new Controlador();
 	private JTextField tFIdElemento;
 	private JTextField tFNombreElemento;
 	private JTextField tFCantElemento;

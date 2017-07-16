@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
-import Elementos.Elemento;
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -28,7 +28,7 @@ import javax.swing.JTable;
 
 public class InterfaceConsultaIDElementos extends JInternalFrame {
 	
-	ControladorElementos control = new ControladorElementos();
+	Controlador control = new Controlador();
 
 	private JPanel contentPane;
 	private JTextField tfIdElemento;

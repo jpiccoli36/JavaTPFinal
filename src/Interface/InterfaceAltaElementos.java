@@ -7,9 +7,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
-import Elementos.Elemento;
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,7 +25,7 @@ import java.awt.Color;
 public class InterfaceAltaElementos extends JInternalFrame {
 
 	private JPanel contentPane;
-	ControladorElementos control= new ControladorElementos();
+	Controlador control= new Controlador();
 	private JTextField tfNombreElemento;
 	private JTextField tfCantidadElemento;
 
@@ -113,7 +113,7 @@ public class InterfaceAltaElementos extends JInternalFrame {
 
 	protected void AltaClick() {
 		Elemento e = new Elemento();
-		ControladorElementos ce = new ControladorElementos();
+		Controlador ce = new Controlador();
 		
 		e.setNombre_elemento(tfNombreElemento.getText());
 		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));

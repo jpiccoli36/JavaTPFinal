@@ -10,9 +10,8 @@ import javax.swing.table.DefaultTableModel;
 
 import com.mysql.jdbc.PreparedStatement;
 
-import Controlador.ControladorElementos;
-
-import Elementos.Elemento;
+import Controlador.Controlador;
+import Entidades.Elemento;
 import Interface.InterfaceConsultarTodosElementos;
 
 public class DatosElementos {

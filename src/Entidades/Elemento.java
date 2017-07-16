@@ -1,7 +1,6 @@
-package Elementos;
+package Entidades;
 
 public class Elemento {
-/*hola*/
 	int id_elemento;
 
 	public Elemento() {

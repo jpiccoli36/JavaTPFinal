@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.ControladorElementos;
+import Controlador.Controlador;
 import Datos.DatosElementos;
-import Elementos.Elemento;
+import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -32,7 +32,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfIDElemento;
-	private ControladorElementos control = new ControladorElementos();
+	private Controlador control = new Controlador();
 	private JTable table;
 
 	/**
@@ -151,7 +151,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 
 	protected void clickbaja() {
 		Elemento e = new Elemento();
-		ControladorElementos ce = new ControladorElementos();		
+		Controlador ce = new Controlador();		
 		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
 		ce.Baja(e);
 		}

@@ -10,7 +10,7 @@ public class Login {
 		
 		
 		try {
-			stmt =FactoryConexion.getInstancia().getConn().prepareStatement("select nombre, apellido,dni,categoria from usuarios where usuario= ? and contraseña=?");
+			stmt =FactoryConexion.getInstancia().getConn().prepareStatement("select NombreUsuario, ApellidoUsuario,DNI,Categoria from usuarios where Usuario= ? and Contraseña=?");
 			stmt.setString(1,Nombre);
 			stmt.setString(2, contraseña);
 			

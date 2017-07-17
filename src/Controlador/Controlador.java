@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Datos.DatosElementos;
+import Datos.DatosUsuarios;
 import Entidades.Elemento;
 import Entidades.Persona;
 
 public class Controlador {
 	private DatosElementos de;
+	private DatosUsuarios da;
 
 	Scanner w = new Scanner(System.in);
 	private ArrayList<Elemento> el = new ArrayList<Elemento>();
@@ -69,7 +71,8 @@ public class Controlador {
 	}
 
 	public void AltaPersona(Persona p) {
-		pe.add(p);
+		da= new DatosUsuarios();
+		da.AltaUsuario(p);
 
 	}
 

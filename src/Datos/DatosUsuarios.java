@@ -19,14 +19,15 @@ public class DatosUsuarios {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into usuarios(NombreUsuario,ApellidoUsuario,DNI,Usuario,Contraseña) values (?,?,?,?,?)",
+					"insert into usuarios(NombreUsuario,ApellidoUsuario,DNI,Usuario,Contraseña,Categoria) values (?,?,?,?,?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getNombre());
 			stmt.setString(2, p.getApellido());
 			stmt.setString(3, p.getDNI());
 			stmt.setString(4, p.getUsuario());
 			stmt.setString(5, p.getContraseña());
-			int resp = stmt.executeUpdate();
+			stmt.setString(6, p.getCategoria());
+			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			if (rs != null && rs.next()) {
 				p.setId(rs.getInt(1));

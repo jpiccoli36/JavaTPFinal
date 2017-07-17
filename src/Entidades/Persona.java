@@ -9,6 +9,13 @@ public class Persona {
 	int id;
 	String nombre;
 	String usuario;
+	String Categoria;
+	public String getCategoria() {
+		return Categoria;
+	}
+	public void setCategoria(String categoria) {
+		Categoria = categoria;
+	}
 	public String getUsuario() {
 		return usuario;
 	}

@@ -73,6 +73,11 @@ public class InterfaceLogin extends JFrame {
 		});
 		
 		JButton btnNuevoUsuario = new JButton("Crear Usuario");
+		btnNuevoUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			ShowCrearUsuario();}
+		});
 		btnNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -115,6 +120,14 @@ public class InterfaceLogin extends JFrame {
 					.addGap(65))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	protected void ShowCrearUsuario() {
+		
+		InterfaceAltaUsuario iau = new InterfaceAltaUsuario();
+		iau.setVisible(true);
+		InterfaceLogin.this.dispose();
+		
 	}
 
 	protected void logearClick() {

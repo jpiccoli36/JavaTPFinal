@@ -57,10 +57,10 @@ public class Persona {
 	public void setDNI(String dNI) {
 		DNI = dNI;
 	}
-	public int getId() {
+	public int getIdUsuario() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setIdUsuario(int id) {
 		this.id = id;
 	}
 	

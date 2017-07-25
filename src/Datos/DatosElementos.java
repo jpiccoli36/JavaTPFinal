@@ -98,9 +98,9 @@ public class DatosElementos {
 
 	}
 
-	public ResultSet BajaElementos(Elemento e) {
+	public void BajaElementos(Elemento e) {
 		java.sql.PreparedStatement stmt = null;
-		ResultSet rs = null;
+		
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
@@ -109,7 +109,6 @@ public class DatosElementos {
 			stmt.executeUpdate();
 
 		} catch (SQLException s) {
-
 			s.printStackTrace();
 		}
 		JOptionPane.showMessageDialog(null, "Elemento Eliminado");
@@ -118,8 +117,7 @@ public class DatosElementos {
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
-		return rs;
+		}		
 
 	}
 

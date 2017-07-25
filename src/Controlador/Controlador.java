@@ -11,7 +11,7 @@ import Entidades.Persona;
 
 public class Controlador {
 	private DatosElementos de;
-	private DatosUsuarios da;
+	private DatosUsuarios du;
 
 	Scanner w = new Scanner(System.in);
 	private ArrayList<Elemento> el = new ArrayList<Elemento>();
@@ -71,14 +71,14 @@ public class Controlador {
 	}
 
 	public void AltaPersona(Persona p) {
-		da= new DatosUsuarios();
-		da.AltaUsuario(p);
+		du= new DatosUsuarios();
+		du.AltaUsuario(p);
 
 	}
 
 	public void ModificaPersona(Persona p) {
 		for (Persona per : pe) {
-			if (per.getId()==(p.getId())) {
+			if (per.getIdUsuario()==(p.getIdUsuario())) {
 				pe.remove(per);
 				break;
 			}
@@ -90,25 +90,20 @@ public class Controlador {
 		pers.setApellido(w.nextLine());
 		System.out.println("Ingrese el nuevo dni\n");
 		pers.setDNI(w.nextLine());
-		pers.setId(p.getId());
+		pers.setIdUsuario(p.getIdUsuario());
 		this.pe.add(pers);
 
 	}
 
-	public void BajaPersonas(int id) {
-		for (Persona per : pe) {
-			if (per.getId()==(id)) {
-				pe.remove(per);
-				break;
-			}
-		}
+	public void BajaPersonas(Persona p) {		
+		du.BajaUsuario(p);
 		
 	}
 
 	public Persona PersonaPorDni(Persona p) {
 		for (Persona per : pe) {
 			if (per.getDNI().equals(p.getDNI())) {
-				System.out.println("Id: " + per.getId() + "\nNombre: " + per.getNombre() + "\nApellido: " + per.getApellido() + "\nDni: "
+				System.out.println("Id: " + per.getIdUsuario() + "\nNombre: " + per.getNombre() + "\nApellido: " + per.getApellido() + "\nDni: "
 						+ per.getDNI() );
 				return per;					
 			} 
@@ -120,7 +115,7 @@ public class Controlador {
 
 	public void consultaPersona() {
 		for (Persona p : pe) {
-			System.out.println("Id :" + p.getId()+ "\n" +  "Nombre: " + p.getNombre() + "\n" + "Apellido: " + p.getApellido() + "\n" + "DNI: "
+			System.out.println("Id :" + p.getIdUsuario()+ "\n" +  "Nombre: " + p.getNombre() + "\n" + "Apellido: " + p.getApellido() + "\n" + "DNI: "
 					+ p.getDNI() );
 
 		}
@@ -130,9 +125,9 @@ public class Controlador {
 
 	public void personaId(int n) {
 		for (Persona per : pe) {
-			if (per.getId() == n) {
+			if (per.getIdUsuario() == n) {
 
-					System.out.println("\nId: " + per.getId() + "\nNombre: " + per.getNombre() + "\nApellido: " + per.getApellido() + "\nDni: "
+					System.out.println("\nId: " + per.getIdUsuario() + "\nNombre: " + per.getNombre() + "\nApellido: " + per.getApellido() + "\nDni: "
 							+ per.getDNI() );
 					break;
 			}

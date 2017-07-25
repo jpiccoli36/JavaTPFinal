@@ -2,6 +2,7 @@ package Datos;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
@@ -30,7 +31,7 @@ public class DatosUsuarios {
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			if (rs != null && rs.next()) {
-				p.setId(rs.getInt(1));
+				p.setIdUsuario(rs.getInt(1));
 			}
 
 		} catch (SQLException s) {
@@ -45,6 +46,47 @@ public class DatosUsuarios {
 			e1.printStackTrace();
 		}
 
+	}
+
+	public void BajaUsuario(Persona p) {
+		
+		java.sql.PreparedStatement stmt = null;
+		
+		try {
+			
+			stmt = FactoryConexion.getInstancia().getConn()
+					.prepareStatement("DELETE FROM usuarios where idUsuarios=?");
+			stmt.setInt(1, p.getIdUsuario());
+			stmt.executeUpdate();
+
+		} catch (SQLException s) {
+
+			s.printStackTrace();
+		}
+		JOptionPane.showMessageDialog(null, "Usuario Eliminado");
+		try {
+			stmt.close();
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+		
+		
+	}
+
+	public ResultSet ConsultaTodosUsuarios() {
+		ResultSet rs = null;
+
+		try {
+			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
+
+			rs = stmt.executeQuery("select * from usuarios");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;	
+	
 	}
 
 }

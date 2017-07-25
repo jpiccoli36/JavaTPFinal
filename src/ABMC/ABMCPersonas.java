@@ -31,8 +31,9 @@ public class ABMCPersonas {
 			break;
 		case "b":
 			System.out.println("ingrese el id de la persona");
-			int id=Integer.parseInt(s.nextLine());
-			ctr.BajaPersonas(id);
+			Persona o = new Persona();
+			o.setIdUsuario(Integer.parseInt(s.nextLine()));
+			ctr.BajaPersonas(o);
 			System.out.println("hacer otra accion Si(s)-No(n)?");
 			rta=s.nextLine();
 			break;
@@ -58,7 +59,7 @@ public class ABMCPersonas {
 	private void modifica(Persona p){
 		Scanner w= new Scanner(System.in);
 		System.out.println("ingrese el id de la persona a modificar");
-		p.setId(Integer.parseInt(w.nextLine()));
+		p.setIdUsuario(Integer.parseInt(w.nextLine()));
 		ctr.ModificaPersona(p);			
 	}
 private void alta(Persona p){
@@ -70,7 +71,7 @@ private void alta(Persona p){
 	System.out.println("ingrese el dni");
 	p.setDNI(w.nextLine());
 	System.out.println("ingrese el id");
-	p.setId(Integer.parseInt(w.nextLine()));
+	p.setIdUsuario(Integer.parseInt(w.nextLine()));
 	
 	ctr.AltaPersona(p);
 	

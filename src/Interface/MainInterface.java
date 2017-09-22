@@ -56,7 +56,7 @@ public class MainInterface extends JFrame {
 		mnElementos = new JMenu("Elementos");
 		mnElementos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ShowABMCInterface();
+			//	ShowABMCInterface();
 			}
 		});
 		menuBar.add(mnElementos);
@@ -64,7 +64,7 @@ public class MainInterface extends JFrame {
 		JMenuItem mntmAbmcelementos = new JMenuItem("ABMCElementos");
 		mntmAbmcelementos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			ShowABMCInterface();
+		//	ShowABMCInterface();
 			}
 		});
 		
@@ -157,13 +157,13 @@ public class MainInterface extends JFrame {
 		frmalta.setVisible(true);
 	}
 
-	protected void ShowABMCInterface() {
-		ABMCInterface frmElemento = new ABMCInterface();
-		desktopPane.add(frmElemento);
-		frmElemento.setVisible(true);
+	//protected void ShowABMCInterface() {
+		//ABMCInterface frmElemento = new ABMCInterface();
+		//desktopPane.add(frmElemento);
+		//frmElemento.setVisible(true);
 	
 		
-	}
+	//}
 	protected void showConsulta(){
 		InterfaceConsultarTodosElementos fmrtodos = new InterfaceConsultarTodosElementos();
 		desktopPane.add(fmrtodos);

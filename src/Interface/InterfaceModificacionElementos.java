@@ -74,7 +74,7 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -179,12 +179,11 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 	}
 
 	protected void buscarporID() {
-
-		DatosElementos de = new DatosElementos();
+				
 		Elemento e = new Elemento();		
 			e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
 			int id = Integer.parseInt(tfIDElemento.getText());
-			ResultSet rs = de.ConsultaID(id);
+			ResultSet rs = control.ConsultaID(id);
 			try {
 				rs.next();
 
@@ -198,8 +197,7 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 	
 
 	protected void modificarclick() {
-		Elemento e= new Elemento();
-		DatosElementos de = new DatosElementos();
+		Elemento e= new Elemento();	
 		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
 		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));
 		e.setNombre_elemento(tfNombreElemento.getText());

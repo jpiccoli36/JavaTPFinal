@@ -50,29 +50,62 @@ public class InterfaceAdmin extends JFrame {
 		JMenu mnElementos = new JMenu("Elementos");
 		menuBar.add(mnElementos);
 		
+		JMenu mnTiposElementos = new JMenu("Tipos Elementos");
+		mnElementos.add(mnTiposElementos);
+		
 		JMenuItem mntmAltaElementos = new JMenuItem("Alta Elementos");
-		mntmAltaElementos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showIntefaceAltaElementos();
-			}
-		});
-		mnElementos.add(mntmAltaElementos);
+		mnTiposElementos.add(mntmAltaElementos);
 		
 		JMenuItem mntmBajaElementos = new JMenuItem("Baja Elementos");
-		mntmBajaElementos.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				showInterfaceBajaElementos();
-			}
-		});
-		mnElementos.add(mntmBajaElementos);
+		mnTiposElementos.add(mntmBajaElementos);
 		
 		JMenuItem mntmModificarElementos = new JMenuItem("Modificar Elementos");
+		mnTiposElementos.add(mntmModificarElementos);
+		
+		JMenu mnElementosReserva = new JMenu("Elementos Reserva");
+		mnElementos.add(mnElementosReserva);
+		
+		JMenuItem mntmAltaElementoRerserva = new JMenuItem("Alta Elemento Rerserva");
+		mntmAltaElementoRerserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showInterfaceAltaElementoReserva();
+			}
+		});
+		mnElementosReserva.add(mntmAltaElementoRerserva);
 		mntmModificarElementos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showInterfceModificacionElementos();
 			}
 		});
-		mnElementos.add(mntmModificarElementos);
+		mntmBajaElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showInterfaceBajaElementos();
+			}
+		});
+		mntmAltaElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showIntefaceAltaElementos();
+			}
+		});
+		
+		JMenu mnUsuarios = new JMenu("Usuarios");
+		menuBar.add(mnUsuarios);
+		
+		JMenuItem mntmAltaUsuarios = new JMenuItem("Alta Usuarios");
+		mntmAltaUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				AltaUsuario();
+			}
+		});
+		mnUsuarios.add(mntmAltaUsuarios);
+		
+		JMenuItem mntmHabilitarinhabilitarUsuarios = new JMenuItem("Habilitar/Inhabilitar Usuarios");
+		mntmHabilitarinhabilitarUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowInterfaceHabilitar();
+			}
+		});
+		mnUsuarios.add(mntmHabilitarinhabilitarUsuarios);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -81,6 +114,26 @@ public class InterfaceAdmin extends JFrame {
 		desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.WHITE);
 		contentPane.add(desktopPane, BorderLayout.CENTER);
+	}
+
+	protected void showInterfaceAltaElementoReserva() {
+		InterfaceAltaElementosReserva iaer = new InterfaceAltaElementosReserva();
+		desktopPane.add(iaer);
+		iaer.setVisible(true);
+		
+	}
+
+	protected void ShowInterfaceHabilitar() {
+		InterfaceHabilitarInhabilitarUsuarios ihiu = new InterfaceHabilitarInhabilitarUsuarios();
+		desktopPane.add(ihiu);
+		ihiu.setVisible(true);
+		
+	}
+
+	protected void AltaUsuario() {
+		InterfaceAltaUsuario iau = new InterfaceAltaUsuario();
+		desktopPane.add(iau);
+		iau.setVisible(true);
 	}
 
 	protected void showInterfceModificacionElementos() {

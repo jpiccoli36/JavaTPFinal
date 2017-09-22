@@ -29,9 +29,52 @@ public class DatosElementos {
 		}
 		return rs;
 	}
+	public ResultSet ConsultaTodosTipos() {
+		ResultSet rs = null;
 
+		try {
+			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
+
+			rs = stmt.executeQuery("select DISTINCT NombreElemento from elementos ");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	public ResultSet ConsultaTodosNombresTipo(Object Nombre) {
+		ResultSet rs = null;
+		java.sql.PreparedStatement stmt = null;				
+
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select DISTINCT NombreElementoReserva from elementos el inner join elementosreserva er on el.NombreElemento=er.TipoElemento where NombreElemento=?");
+			stmt.setObject(1, Nombre);;
+			rs = stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
 	public ResultSet ConsultaID(int id) {
 		return ConsultaIDElementos(id);
+	}
+	public void agregarElementoReserva(Elemento e, Object ob)	
+	{	ResultSet rs= null;
+		java.sql.PreparedStatement stmt = null;
+		try {			
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into elementosreserva (NombreElementoReserva,TipoElemento) VALUES (?,?)");
+			stmt.setString(1, e.getNombre_elemento());
+			stmt.setObject(2, ob);					
+			 stmt.executeUpdate();
+			 JOptionPane.showMessageDialog(null, "Elemento Reserva Agregado");
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+ 
+		
+		
 	}
 
 	public ResultSet ConsultaIDElementos(int id) {
@@ -99,13 +142,13 @@ public class DatosElementos {
 	}
 
 	public void BajaElementos(Elemento e) {
-		java.sql.PreparedStatement stmt = null;
-		
+		java.sql.PreparedStatement stmt = null;		
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
-					.prepareStatement("DELETE FROM elementos where idElementos=?");
-			stmt.setInt(1, e.getId_elemento());
+					.prepareStatement("DELETE elementos,elementosreserva  FROM elementos,elementosreserva where NombreElemento=TipoElemento and NombreElemento=? ");
+			stmt.setString(1, e.getNombre_elemento());			
+			
 			stmt.executeUpdate();
 
 		} catch (SQLException s) {

@@ -3,7 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -20,8 +20,15 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ResourceBundle.Control;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JSeparator;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextArea;
+import javax.swing.DefaultComboBoxModel;
 
-public class InterfaceAltaUsuario extends JFrame {
+public class InterfaceAltaUsuario extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfNombreUsuario;
@@ -29,6 +36,8 @@ public class InterfaceAltaUsuario extends JFrame {
 	private JTextField tfDNIUsuario;
 	private JTextField tfUsuario;
 	private JTextField tfContraseñaUsuario;
+	private JCheckBox chckbxHabilitado;
+	private JComboBox cbcategoria;
 
 	/**
 	 * Launch the application.
@@ -50,7 +59,10 @@ public class InterfaceAltaUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceAltaUsuario() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setClosable(true);
+		setIconifiable(true);
+		setMaximizable(true);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 459, 343);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,13 +102,18 @@ public class InterfaceAltaUsuario extends JFrame {
 		});
 		
 		JButton btnSalir = new JButton("Salir");
+		
+		chckbxHabilitado = new JCheckBox("Habilitado");
+		
+		cbcategoria = new JComboBox();
+		cbcategoria.setModel(new DefaultComboBoxModel(new String[] {"Usuario", "Administrador", "Encargado"}));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblNombre)
@@ -111,21 +128,28 @@ public class InterfaceAltaUsuario extends JFrame {
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 											.addComponent(tfApellidoUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 											.addComponent(tfDNIUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(lblUsuario)
 											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 											.addComponent(tfUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(lblContrasea)
-											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(tfContraseñaUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+													.addComponent(chckbxHabilitado)
+													.addGap(26))
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(18)
+													.addComponent(tfContraseñaUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))))
+							.addGap(25)
+							.addComponent(cbcategoria, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(61)
 							.addComponent(btnCrearUsuario)
-							.addGap(18)
+							.addGap(46)
 							.addComponent(btnSalir)))
-					.addContainerGap(166, Short.MAX_VALUE))
+					.addContainerGap(173, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -150,23 +174,41 @@ public class InterfaceAltaUsuario extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblContrasea)
 						.addComponent(tfContraseñaUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(29)
+					.addGap(17)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(chckbxHabilitado)
+						.addComponent(cbcategoria, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
+					.addGap(44)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnCrearUsuario)
 						.addComponent(btnSalir))
-					.addContainerGap(64, Short.MAX_VALUE))
+					.addGap(18))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 
 	protected void clickCrearUsuario() {
+		
 				Persona p = new Persona();
 				p.setApellido(tfApellidoUsuario.getText());
 				p.setNombre(tfNombreUsuario.getText());
 				p.setUsuario(tfUsuario.getText());
 				p.setContraseña(tfContraseñaUsuario.getText());
-				p.setDNI(tfDNIUsuario.getText());
-				p.setCategoria("usuario");
+				p.setDNI(tfDNIUsuario.getText());				
+				p.setEstado(chckbxHabilitado.isSelected());
+				if(cbcategoria.getSelectedIndex()==0){
+					p.setCategoria("user");
+					
+				}
+				else{
+					if(cbcategoria.getSelectedIndex()==1){
+						p.setCategoria("admin");
+					}
+					else{
+						p.setCategoria("encargado");
+					}
+				}
+				
 				Controlador control = new Controlador();
 				control.AltaPersona(p);
 				

@@ -55,7 +55,7 @@ public class InterfaceConsultaPorNombre extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setMaximizable(true);
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -105,10 +105,10 @@ public class InterfaceConsultaPorNombre extends JInternalFrame {
 		DefaultTableModel dfm = new DefaultTableModel();
 		table = this.table;
 		table.setModel(dfm);
-		dfm.setColumnIdentifiers(new Object[] { "ID", "Nombre", "Cantidad" });
-		DatosElementos da = new DatosElementos();
+		Controlador ce = new Controlador();
+		dfm.setColumnIdentifiers(new Object[] { "ID", "Nombre", "Cantidad" });		
 		String Nombre = tfNombreElemento.getText();
-		ResultSet rs = da.ConsultaNombreElementos(Nombre);
+		ResultSet rs = ce.ConsultaNombreElementos(Nombre);
 		if (rs != null) {
 			try {
 				while (rs.next()) {

@@ -53,7 +53,7 @@ public class InterfaceAltaElementos extends JInternalFrame {
 		setIconifiable(true);
 		setTitle("Alta Elementos");
 		setMaximizable(true);
-		setDefaultCloseOperation(JInternalFrame.DO_NOTHING_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 317, 231);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

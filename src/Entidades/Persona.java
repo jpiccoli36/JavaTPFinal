@@ -10,6 +10,15 @@ public class Persona {
 	String nombre;
 	String usuario;
 	String Categoria;
+	Boolean Estado;
+	
+
+	public Boolean getEstado() {
+		return Estado;
+	}
+	public void setEstado(Boolean estado) {
+		Estado = estado;
+	}
 	public String getCategoria() {
 		return Categoria;
 	}
@@ -63,6 +72,7 @@ public class Persona {
 	public void setIdUsuario(int id) {
 		this.id = id;
 	}
+	
 	
 	
 

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controlador.Controlador;
 import Datos.Login;
 
 import javax.swing.GroupLayout;
@@ -71,27 +72,13 @@ public class InterfaceLogin extends JFrame {
 				logearClick();
 			}
 		});
-		
-		JButton btnNuevoUsuario = new JButton("Crear Usuario");
-		btnNuevoUsuario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-			ShowCrearUsuario();}
-		});
-		btnNuevoUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnLogear)
-							.addGap(60)
-							.addComponent(btnNuevoUsuario))
+						.addComponent(btnLogear)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblUsuario)
@@ -100,7 +87,7 @@ public class InterfaceLogin extends JFrame {
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(tfUsuario)
 								.addComponent(tfContraseña, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))))
-					.addContainerGap(173, Short.MAX_VALUE))
+					.addContainerGap(213, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -114,27 +101,18 @@ public class InterfaceLogin extends JFrame {
 						.addComponent(lblContrasea)
 						.addComponent(tfContraseña, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnLogear)
-						.addComponent(btnNuevoUsuario))
+					.addComponent(btnLogear)
 					.addGap(65))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	protected void ShowCrearUsuario() {
-		
-		InterfaceAltaUsuario iau = new InterfaceAltaUsuario();
-		iau.setVisible(true);
-		InterfaceLogin.this.dispose();
-		
-	}
-
 	protected void logearClick() {
-		Login log = new Login();
+		
+		Controlador ce = new Controlador();
 		String usua=tfUsuario.getText();
 		String contraseña=tfContraseña.getText();
-		ResultSet rs=log.login(usua,contraseña);
+		ResultSet rs=ce.login(usua,contraseña);
 		
 		
 		if(rs!=null)

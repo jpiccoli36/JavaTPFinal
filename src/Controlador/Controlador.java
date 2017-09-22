@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import Datos.DatosElementos;
 import Datos.DatosUsuarios;
+import Datos.Login;
 import Entidades.Elemento;
 import Entidades.Persona;
 
@@ -63,6 +64,15 @@ public class Controlador {
 		de.BajaElementos(s);
 
 	}
+	public ResultSet AgregarTipos(){
+		
+		return de.ConsultaTodosTipos();
+	}
+	public void AgregarElemento(Elemento e, Object tipoEl) {
+		
+		de.agregarElementoReserva(e,tipoEl);
+		
+	}
 
 	public void Modifica(Elemento e) {
 		DatosElementos de = new DatosElementos();
@@ -74,6 +84,9 @@ public class Controlador {
 		du= new DatosUsuarios();
 		du.AltaUsuario(p);
 
+	}
+	public void Habilitado(){
+		
 	}
 
 	public void ModificaPersona(Persona p) {
@@ -134,6 +147,50 @@ public class Controlador {
 
 		}
 	}
+
+	public ResultSet ConsultaIDElementos(int id) {
 		
+		return de.ConsultaIDElementos(id);
+	
+	}
+
+	public ResultSet ConsultaNombreElementos(String nombre) {
+		return de.ConsultaNombreElementos(nombre);
+		
+	}
+
+	public ResultSet ConsultaTodos() {
+		return de.ConsultaTodos();
+	
+	}
+
+	public ResultSet ConsultarEstado(int iD) {
+		return du.ConsultarEstado(iD);		
+	}
+
+	public void InhabilitarUsuario(Persona p) {
+		du.InhabilitarUsuario(p);
+		
+	}
+
+	public void HabilitarUsuario(Persona p) {
+		du.HabilitarUsuario(p);
+		
+	}
+
+	public ResultSet login(String usua, String contraseña) {
+		Login log = new Login();
+		return log.login(usua, contraseña);
+		
+		
+	}
+
+	public ResultSet ConsultaID(int id) {
+		return de.ConsultaID(id) ;	
+	}
+
+
+
+
 
 }

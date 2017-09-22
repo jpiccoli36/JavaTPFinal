@@ -77,7 +77,7 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -120,9 +120,9 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);
-		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});
-		DatosElementos da= new DatosElementos();		
-			ResultSet rs=da.ConsultaTodos();
+		Controlador ce= new Controlador();
+		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});				
+			ResultSet rs=ce.ConsultaTodos();
 				if(rs!=null ){
 					try {
 						while(rs.next()){

@@ -1,7 +1,6 @@
 package Interface;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.BorderLayout;import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -31,7 +30,7 @@ import javax.swing.JScrollPane;
 public class InterfaceBajaElementos extends JInternalFrame {
 
 	private JPanel contentPane;
-	private JTextField tfIDElemento;
+	private JTextField tfNombreElemento;
 	private Controlador control = new Controlador();
 	private JTable table;
 
@@ -59,16 +58,16 @@ public class InterfaceBajaElementos extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setIconifiable(true);
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblIdElemento = new JLabel("ID Elemento");
+		JLabel lblNombreElemento = new JLabel("Nombre Elemento");
 		
-		tfIDElemento = new JTextField();
-		tfIDElemento.setColumns(10);
+		tfNombreElemento = new JTextField();
+		tfNombreElemento.setColumns(10);
 		
 		JButton btnBaja = new JButton("BAJA");
 		btnBaja.addMouseListener(new MouseAdapter() {
@@ -95,12 +94,12 @@ public class InterfaceBajaElementos extends JInternalFrame {
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(36)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblIdElemento)
+								.addComponent(lblNombreElemento)
 								.addComponent(btnBaja))
 							.addGap(31)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnBuscarTodosLos)
-								.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -109,8 +108,8 @@ public class InterfaceBajaElementos extends JInternalFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(27)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblIdElemento)
-						.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNombreElemento)
+						.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnBaja)
@@ -152,7 +151,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 	protected void clickbaja() {
 		Elemento e = new Elemento();
 		Controlador ce = new Controlador();		
-		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
+		e.setNombre_elemento(tfNombreElemento.getText());
 		ce.Baja(e);
 		}
 }

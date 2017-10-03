@@ -31,7 +31,7 @@ public class DatosElementos {
 	}
 	public ResultSet ConsultaTodosTipos() {
 		ResultSet rs = null;
-
+		ResultSet rs1= null;
 		try {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 

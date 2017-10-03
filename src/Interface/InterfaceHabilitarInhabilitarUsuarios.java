@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle.Control;
 
 public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
+	DatosUsuarios du= new DatosUsuarios();
 
 	private JPanel contentPane;
 	private JTextField tfApellido;
@@ -164,26 +165,23 @@ public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
 
 	protected void HabilitarUsuario() {
 		Persona p = new Persona();
-		p.setIdUsuario( Integer.parseInt(tfIDUsuario.getText()));
-		Controlador ce = new Controlador();		
-		ce.HabilitarUsuario(p);
+		p.setIdUsuario( Integer.parseInt(tfIDUsuario.getText()));				
+		du.HabilitarUsuario(p);
 
 	}
 
 	protected void InhabiltarUsuario() {
 		Persona p = new Persona();
-		p.setIdUsuario(Integer.parseInt(tfIDUsuario.getText()));
-		Controlador ce=new Controlador();			
-		ce.InhabilitarUsuario(p);
-		
+		p.setIdUsuario(Integer.parseInt(tfIDUsuario.getText()));				
+		du.InhabilitarUsuario(p);	
 		
 
 	}
 
 	protected void ShowEstadoUsuario() {		
-		int ID = Integer.parseInt(tfIDUsuario.getText());
-		Controlador ce= new Controlador();		
-		ResultSet rs = ce.ConsultarEstado(ID);		
+		int ID = Integer.parseInt(tfIDUsuario.getText());				
+		ResultSet rs = du.ConsultarEstado(ID);		
+		
 		try {
 			rs.next();
 		} catch (SQLException e) {						

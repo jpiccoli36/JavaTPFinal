@@ -165,7 +165,9 @@ public class Controlador {
 	}
 
 	public ResultSet ConsultarEstado(int iD) {
-		return du.ConsultarEstado(iD);		
+		System.out.println("controlador");
+		ResultSet rs= du.ConsultarEstado(iD);
+		return rs;
 	}
 
 	public void InhabilitarUsuario(Persona p) {

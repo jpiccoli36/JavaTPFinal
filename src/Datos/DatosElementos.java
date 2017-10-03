@@ -22,7 +22,7 @@ public class DatosElementos {
 		try {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 
-			rs = stmt.executeQuery("select * from elementos");
+			rs = stmt.executeQuery("select * from tiposelementos");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -35,7 +35,7 @@ public class DatosElementos {
 		try {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 
-			rs = stmt.executeQuery("select DISTINCT NombreElemento from elementos ");
+			rs = stmt.executeQuery("select DISTINCT NombreElemento from tiposelementos ");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +47,7 @@ public class DatosElementos {
 		java.sql.PreparedStatement stmt = null;				
 
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select DISTINCT NombreElementoReserva from elementos el inner join elementosreserva er on el.NombreElemento=er.TipoElemento where NombreElemento=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select DISTINCT NombreElementoReserva from tiposelementos el inner join elementos er on el.NombreElemento=er.TipoElemento where NombreElemento=?");
 			stmt.setObject(1, Nombre);;
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
@@ -63,7 +63,7 @@ public class DatosElementos {
 	{	ResultSet rs= null;
 		java.sql.PreparedStatement stmt = null;
 		try {			
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into elementosreserva (NombreElementoReserva,TipoElemento) VALUES (?,?)");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into elementos (NombreElementoReserva,TipoElemento) VALUES (?,?)");
 			stmt.setString(1, e.getNombre_elemento());
 			stmt.setObject(2, ob);					
 			 stmt.executeUpdate();
@@ -83,7 +83,7 @@ public class DatosElementos {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select idElementos, NombreElemento,CantidadElementos from elementos where idElementos= ?");
+					"select idElementos, NombreElemento,CantidadElementos from tiposelementos where idElementos= ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
@@ -99,7 +99,7 @@ public class DatosElementos {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"select idElementos, NombreElemento,CantidadElementos from elementos where NombreElemento= ?");
+					"select idElementos, NombreElemento,CantidadElementos from tiposelementos where NombreElemento= ?");
 			stmt.setString(1, Nombre);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
@@ -116,7 +116,7 @@ public class DatosElementos {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into elementos(NombreElemento,CantidadElementos) values (?,?)",
+					"insert into tiposelementos(NombreElemento,CantidadElementos) values (?,?)",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, e.getNombre_elemento());
 			stmt.setInt(2, e.getCantidad_elemento());
@@ -146,7 +146,7 @@ public class DatosElementos {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
-					.prepareStatement("DELETE elementos,elementosreserva  FROM elementos,elementosreserva where NombreElemento=TipoElemento and NombreElemento=? ");
+					.prepareStatement("DELETE tiposelementos,elementos  FROM tiposelementos,elementos where NombreElemento=TipoElemento and NombreElemento=? ");
 			stmt.setString(1, e.getNombre_elemento());			
 			
 			stmt.executeUpdate();
@@ -168,7 +168,7 @@ public class DatosElementos {
 		java.sql.PreparedStatement stmt =null;
 		ResultSet rs=null;
 		try {
-			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE elementos SET NombreElemento=?,CantidadElementos=? WHERE idElementos=?");
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE tiposelementos SET NombreElemento=?,CantidadElementos=? WHERE idElementos=?");
 			stmt.setInt(3, e.getId_elemento());
 			stmt.setString(1,e.getNombre_elemento());
 			stmt.setInt(2, e.getCantidad_elemento());

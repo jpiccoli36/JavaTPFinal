@@ -91,12 +91,12 @@ public class DatosUsuarios {
 
 	}
 
-	public ResultSet ConsultarEstado(int id) {
+	public ResultSet ConsultarEstado(int id) {		
 		java.sql.PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
-					.prepareStatement("select * from usuarios where idUsuario= ?");
+					.prepareStatement("select * from usuarios where IdUsuario= ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {

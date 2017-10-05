@@ -166,7 +166,7 @@ public class DatosElementos {
 
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
-					.prepareStatement("DELETE tiposelementos,elementos  FROM tiposelementos,elementos where NombreElemento=TipoElemento and NombreElemento=? ");
+					.prepareStatement("delete from tiposelementos where idElementos=? ");
 			stmt.setInt(1, e.getId_elemento());			
 			
 			stmt.executeUpdate();

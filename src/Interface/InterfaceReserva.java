@@ -3,7 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -38,17 +38,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.DropMode;
 
-public class InterfaceReserva extends JFrame {
+public class InterfaceReserva extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfFechayHoraIni;
 	private JTextField tfFechayHoraFin;
 	private JComboBox cboxTipos;
 	private JTable table;
-	private JTextField textField1;
-	private JTextField textField2;
+	private JTextField tfElemento;
+	private JTextField tfTipo;
 	private JLabel lblElemento;
 	private JLabel lblTipoElemento;
+	private JButton btnReservar;
 
 	/**
 	 * Launch the application.
@@ -69,7 +70,7 @@ public class InterfaceReserva extends JFrame {
 	
 	public InterfaceReserva() {
 		setTitle("Reserva");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 373);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -111,17 +112,25 @@ public class InterfaceReserva extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		textField1 = new JTextField();
-		textField1.setEditable(false);
-		textField1.setColumns(10);
+		tfElemento = new JTextField();
+		tfElemento.setEditable(false);
+		tfElemento.setColumns(10);
 		
-		textField2 = new JTextField();
-		textField2.setEditable(false);
-		textField2.setColumns(10);
+		tfTipo = new JTextField();
+		tfTipo.setEditable(false);
+		tfTipo.setColumns(10);
 		
 		lblElemento = new JLabel("Elemento");
 		
 		lblTipoElemento = new JLabel("Tipo Elemento");
+		
+		btnReservar = new JButton("Reservar");
+		btnReservar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ReservarClick();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -130,25 +139,28 @@ public class InterfaceReserva extends JFrame {
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblFechayHoraIni)
-								.addComponent(lblFechayHoraFin))
-							.addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblFechayHoraIni)
+										.addComponent(lblFechayHoraFin))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(tfFechayHoraIni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(tfFechayHoraFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblElemento)
+									.addGap(21)
+									.addComponent(tfElemento, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblTipoElemento)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(tfTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(51)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(tfFechayHoraIni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(tfFechayHoraFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(164)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnReservar)
 								.addComponent(btnBuscar)
-								.addComponent(cboxTipos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblElemento)
-							.addGap(21)
-							.addComponent(textField1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblTipoElemento)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(cboxTipos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(43, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -166,10 +178,11 @@ public class InterfaceReserva extends JFrame {
 						.addComponent(btnBuscar))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(tfElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblElemento)
 						.addComponent(lblTipoElemento)
-						.addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(tfTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnReservar))
 					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -187,12 +200,69 @@ public class InterfaceReserva extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	protected void Agregar() {
+	protected void ReservarClick() {
+		SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String tipo=tfTipo.getText();
+		String usuario=InterfaceLogin.Usuario();
+		int cant;
+		int cont;
+		String elemento=tfElemento.getText();
+		java.util.Date FechaHoraIni;
+		java.util.Date FechaHoraFin;
+		try {
+			FechaHoraIni = f.parse(this.tfFechayHoraIni.getText());
+			FechaHoraFin = f.parse(this.tfFechayHoraFin.getText());
+		 
+		
+		ResultSet rs=null;
+		ResultSet rs1=null;
+		DatosReserva dr = new DatosReserva();
+		rs=dr.CantidadMaxReservas(tipo);			
+			rs.next();			
+			cant=Integer.parseInt(rs.getString("CantidadElementos"));		
+			rs1=dr.ContarReservas(tipo,usuario);
+			rs1.next();
+			cont=(rs1.getInt(1));			
+			if(cant>cont){
+			dr.ReservarElemento(usuario, FechaHoraIni, FechaHoraFin, elemento, tipo);
+			tfElemento.setText(null);
+			tfTipo.setText(null);
+			tfFechayHoraFin.setText(null);
+			tfFechayHoraIni.setText(null);
+			table.removeAll();
+			}
+			}
+			
+		
+		 catch (NumberFormatException e) {
+			
+			e.printStackTrace();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		}
+		
+		
+		
+		
+	
+
+
+	protected void Agregar() {	
 		int i = table.getSelectedRow();
 		if(i!=-1){
 			
-			textField1.setText(table.getValueAt(i, 0).toString());
-			textField2.setText(table.getValueAt(i, 1).toString());
+			tfElemento.setText(table.getValueAt(i, 0).toString());
+			tfTipo.setText(table.getValueAt(i, 1).toString());
 		}
 		
 	}
@@ -261,7 +331,7 @@ public class InterfaceReserva extends JFrame {
 					}					
 					
 				}
-			//	01/01/2003 11:00
+			
 				
 				
 				

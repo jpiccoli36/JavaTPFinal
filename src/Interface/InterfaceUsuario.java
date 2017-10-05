@@ -59,6 +59,17 @@ public class InterfaceUsuario extends JFrame {
 			}
 		});
 		mnElementos.add(mntmConsultarTodos);
+		
+		JMenu mnReserva = new JMenu("Reserva");
+		menuBar.add(mnReserva);
+		
+		JMenuItem mntmReservar = new JMenuItem("Reservar");
+		mntmReservar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowReservar();
+			}
+		});
+		mnReserva.add(mntmReservar);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -70,6 +81,13 @@ public class InterfaceUsuario extends JFrame {
 	}
 
 	
+	protected void ShowReservar() {
+		InterfaceReserva ir= new InterfaceReserva();
+		desktopPane.add(ir);
+		ir.setVisible(true);
+		
+	}
+
 	protected void showConsultarTodos() {
 		InterfaceConsultarTodosElementos ice = new InterfaceConsultarTodosElementos();
 		desktopPane.add(ice);

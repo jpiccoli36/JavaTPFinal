@@ -25,9 +25,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InterfaceLogin extends JFrame {
+	
 
 	private JPanel contentPane;
-	private JTextField tfUsuario;
+	private static JTextField tfUsuario;
 	private JTextField tfContraseña;
 
 	/**
@@ -116,16 +117,17 @@ public class InterfaceLogin extends JFrame {
 		
 		
 		if(rs!=null)
-		{			
+		{			 
 			
 			try {
-				if(rs.getString(4).equals("admin")){
+				if(rs.getString(4).equals("admin")){				
 					InterfaceAdmin ia= new InterfaceAdmin();
 					ia.setVisible(true);
 					InterfaceLogin.this.dispose();
+					
 				}
 				else{
-					if(rs.getString(4).equals("user")){
+					if(rs.getString(4).equals("user")){						
 						InterfaceUsuario il = new InterfaceUsuario();
 						il.setVisible(true);
 						InterfaceLogin.this.dispose();
@@ -140,6 +142,13 @@ public class InterfaceLogin extends JFrame {
 		}
 		else {JOptionPane.showMessageDialog(null, "usuario y/o contraseña incorrecta");}	
 		
-		
+	}
 	
-}}
+
+	 public static String Usuario(){
+		String user=tfUsuario.getText();
+		return user;
+		
+		
+		}
+	}

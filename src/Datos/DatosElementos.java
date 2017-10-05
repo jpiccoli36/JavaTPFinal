@@ -29,6 +29,26 @@ public class DatosElementos {
 		}
 		return rs;
 	}
+	
+	
+	public ResultSet SeleccionarTiposElementos(Object el){
+		ResultSet rs=null;
+		java.sql.PreparedStatement stmt = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * "
+					+ " from elementos where TipoElemento=?");
+			stmt.setObject(1, el);
+			rs=stmt.executeQuery();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return rs;
+		
+	}
 	public ResultSet ConsultaTodosTipos() {
 		ResultSet rs = null;
 		
@@ -147,7 +167,7 @@ public class DatosElementos {
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
 					.prepareStatement("DELETE tiposelementos,elementos  FROM tiposelementos,elementos where NombreElemento=TipoElemento and NombreElemento=? ");
-			stmt.setString(1, e.getNombre_elemento());			
+			stmt.setInt(1, e.getId_elemento());			
 			
 			stmt.executeUpdate();
 

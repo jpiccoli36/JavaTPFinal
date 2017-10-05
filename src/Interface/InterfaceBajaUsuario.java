@@ -1,9 +1,8 @@
 package Interface;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.BorderLayout;import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +28,7 @@ import java.sql.SQLException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class InterfaceBajaUsuario extends JFrame {
+public class InterfaceBajaUsuario extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfIdUsuario;
@@ -58,13 +57,13 @@ public class InterfaceBajaUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceBajaUsuario() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				ConsultarTodosBajausuarios();
-			}
-		});
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setTitle("Baja Usuario");
+		setIconifiable(true);
+		setClosable(true);
+		setMaximizable(true);
+		
+		
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,6 +72,7 @@ public class InterfaceBajaUsuario extends JFrame {
 		JLabel lblIdUsuario = new JLabel("ID Usuario: ");
 		
 		tfIdUsuario = new JTextField();
+		tfIdUsuario.setEnabled(false);
 		tfIdUsuario.setColumns(10);
 		
 		JButton btnBajaUsuario = new JButton("Baja Usuario");
@@ -84,21 +84,32 @@ public class InterfaceBajaUsuario extends JFrame {
 		});
 		
 		JScrollPane scrollPane = new JScrollPane();
+		
+		JButton btnMostrarUsuarios = new JButton("Mostrar Usuarios");
+		btnMostrarUsuarios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ConsultarTodosBajausuarios();
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(22)
 							.addComponent(lblIdUsuario)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnBajaUsuario)
-								.addComponent(tfIdUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(tfIdUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(34)
+							.addComponent(btnBajaUsuario))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnMostrarUsuarios)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -107,17 +118,33 @@ public class InterfaceBajaUsuario extends JFrame {
 					.addGap(32)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblIdUsuario)
-						.addComponent(tfIdUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addComponent(btnBajaUsuario)
-					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+						.addComponent(tfIdUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnBajaUsuario))
+					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+					.addComponent(btnMostrarUsuarios)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Seleccion();
+			}
+		});
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
+	protected void Seleccion() {
+		int i = table.getSelectedRow();
+		if(i!=-1){
+			
+			tfIdUsuario.setText(table.getValueAt(i, 0).toString());
+		
+	}
+		}
+
 	protected void ConsultarTodosBajausuarios() {
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
@@ -128,7 +155,7 @@ public class InterfaceBajaUsuario extends JFrame {
 				if(rs!=null ){
 					try {
 						while(rs.next()){
-							dfm.addRow(new Object[]{Integer.parseInt(rs.getString("idUsuarios")),rs.getString("NombreUsuario"),rs.getString("ApellidoUsuario")});
+							dfm.addRow(new Object[]{Integer.parseInt(rs.getString("IdUsuario")),rs.getString("NombreUsuario"),rs.getString("ApellidoUsuario")});
 														
 						}
 					} catch (NumberFormatException e) {
@@ -144,9 +171,11 @@ public class InterfaceBajaUsuario extends JFrame {
 
 	protected void BajaUsuarioClick() {
 		Controlador ctr = new Controlador();
+		DatosUsuarios du = new DatosUsuarios();
 		Persona p = new Persona();
 		p.setIdUsuario(Integer.parseInt(tfIdUsuario.getText()));
-		ctr.BajaPersonas(p);
+		du.BajaUsuario(p);
+		//ctr.BajaPersonas(p);
 		
 		
 	}

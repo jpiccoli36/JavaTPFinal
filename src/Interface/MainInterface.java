@@ -165,7 +165,7 @@ public class MainInterface extends JFrame {
 		
 	//}
 	protected void showConsulta(){
-		InterfaceConsultarTodosElementos fmrtodos = new InterfaceConsultarTodosElementos();
+		InterfaceConsultarTodosTiposElementos fmrtodos = new InterfaceConsultarTodosTiposElementos();
 		desktopPane.add(fmrtodos);
 		fmrtodos.setVisible(true);
 	}

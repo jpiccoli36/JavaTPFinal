@@ -46,7 +46,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class InterfaceConsultarTodosElementos extends JInternalFrame {
+public class InterfaceConsultarTodosTiposElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	Controlador control = new Controlador();
@@ -60,7 +60,7 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfaceConsultarTodosElementos frame = new InterfaceConsultarTodosElementos();
+					InterfaceConsultarTodosTiposElementos frame = new InterfaceConsultarTodosTiposElementos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -72,8 +72,8 @@ public class InterfaceConsultarTodosElementos extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InterfaceConsultarTodosElementos() {
-		setTitle("Buscar Todos ");
+	public InterfaceConsultarTodosTiposElementos() {
+		setTitle("Buscar Todos Tipo Elementos");
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);

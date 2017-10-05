@@ -58,7 +58,7 @@ public class DatosUsuarios {
 
 		try {
 
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM usuarios where idUsuarios=?");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM usuarios where IdUsuario=?");
 			stmt.setInt(1, p.getIdUsuario());
 			stmt.executeUpdate();
 

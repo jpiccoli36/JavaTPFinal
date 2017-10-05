@@ -42,13 +42,14 @@ import java.util.Map;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class InterfaceModificacionElementos extends JInternalFrame {
+public class InterfaceModificarTipoElementos extends JInternalFrame {
 
 	Controlador control = new Controlador();
 	private JPanel contentPane;
 	private JTextField tfNombreElemento;
 	private JTextField tfCantidadElemento;
 	private JTextField tfIDElemento;
+	
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,7 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfaceModificacionElementos frame = new InterfaceModificacionElementos();
+					InterfaceModificarTipoElementos frame = new InterfaceModificarTipoElementos();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -69,7 +70,7 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InterfaceModificacionElementos() {
+	public InterfaceModificarTipoElementos() {
 		setTitle("Modifcar Elementos");
 		setMaximizable(true);
 		setIconifiable(true);
@@ -93,6 +94,7 @@ public class InterfaceModificacionElementos extends JInternalFrame {
 		tfCantidadElemento.setColumns(10);
 
 		tfIDElemento = new JTextField();
+		tfIDElemento.setEnabled(false);
 		tfIDElemento.setColumns(10);
 
 		JButton btnModificar = new JButton("Modificar");

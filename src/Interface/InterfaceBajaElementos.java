@@ -129,7 +129,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 		table.setModel(dfm);
 		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});
 		DatosElementos da= new DatosElementos();		
-			ResultSet rs=da.ConsultaTodos();
+			ResultSet rs=da.ConsultaTodosTiposElementos();
 				if(rs!=null ){
 					try {
 						while(rs.next()){

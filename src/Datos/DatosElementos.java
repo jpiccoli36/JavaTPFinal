@@ -12,17 +12,34 @@ import com.mysql.jdbc.PreparedStatement;
 
 import Controlador.Controlador;
 import Entidades.Elemento;
-import Interface.InterfaceConsultarTodosElementos;
+import Interface.InterfaceConsultarTodosTiposElementos;
 
 public class DatosElementos {
 
-	public ResultSet ConsultaTodos() {
+	public ResultSet ConsultaTodosTiposElementos() {
 		ResultSet rs = null;
 
 		try {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 
 			rs = stmt.executeQuery("select * from tiposelementos");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	public ResultSet ConsultaTodosElementos(Object TipoEl) {
+		ResultSet rs = null;
+		java.sql.PreparedStatement stmt = null;	
+
+		try {
+			 stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from elementos"
+					+ " where TipoElemento=?");
+			stmt.setObject(1,TipoEl);
+			rs=stmt.executeQuery();
+
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,7 +201,7 @@ public class DatosElementos {
 
 	}
 
-	public ResultSet Modificar(Elemento e) {
+	public ResultSet ModificarTipoElementos(Elemento e) {
 		java.sql.PreparedStatement stmt =null;
 		ResultSet rs=null;
 		try {
@@ -200,6 +217,22 @@ public class DatosElementos {
 		}
 		return rs;
 
+	}
+	public void ModificarElemento(int id, String Nombre, String tipo){
+		java.sql.PreparedStatement stmt =null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("update elementos set NombreElementoReserva=?,TipoElemento=?"
+					+ " where IDElementosReserva=?");
+			stmt.setString(1,Nombre);
+			stmt.setString(2, tipo);
+			stmt.setInt(3, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		
 	}
 	public void  BajaTipoElemento(int idelemento) {
 		java.sql.PreparedStatement stmt =null;

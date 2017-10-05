@@ -43,6 +43,7 @@ public class InterfaceUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfaceUsuario() {
+		setTitle("usuario");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -52,13 +53,21 @@ public class InterfaceUsuario extends JFrame {
 		JMenu mnElementos = new JMenu("Elementos");
 		menuBar.add(mnElementos);
 		
-		mntmConsultarTodos = new JMenuItem("Consultar todos");
+		mntmConsultarTodos = new JMenuItem("Consultar Tipo Elementos");
 		mntmConsultarTodos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				showConsultarTodos();
 			}
 		});
 		mnElementos.add(mntmConsultarTodos);
+		
+		JMenuItem mntmConsultarElementos = new JMenuItem("Consultar Elementos");
+		mntmConsultarElementos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowConsultarElementos();
+			}
+		});
+		mnElementos.add(mntmConsultarElementos);
 		
 		JMenu mnReserva = new JMenu("Reserva");
 		menuBar.add(mnReserva);
@@ -70,6 +79,9 @@ public class InterfaceUsuario extends JFrame {
 			}
 		});
 		mnReserva.add(mntmReservar);
+		
+		JMenuItem mntmCancelarReserva = new JMenuItem("Cancelar Reserva");
+		mnReserva.add(mntmCancelarReserva);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -81,15 +93,20 @@ public class InterfaceUsuario extends JFrame {
 	}
 
 	
+	protected void ShowConsultarElementos() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	protected void ShowReservar() {
-		InterfaceReserva ir= new InterfaceReserva();
+		InterfaceAltaReserva ir= new InterfaceAltaReserva();
 		desktopPane.add(ir);
 		ir.setVisible(true);
 		
 	}
 
 	protected void showConsultarTodos() {
-		InterfaceConsultarTodosElementos ice = new InterfaceConsultarTodosElementos();
+		InterfaceConsultarTodosTiposElementos ice = new InterfaceConsultarTodosTiposElementos();
 		desktopPane.add(ice);
 		ice.setVisible(true);
 		

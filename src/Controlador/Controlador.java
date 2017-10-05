@@ -44,7 +44,7 @@ public class Controlador {
 	}
 
 	public void SelectTodosBD(ArrayList<Elemento> e) {
-		de.ConsultaTodos();
+		de.ConsultaTodosTiposElementos();
 	}
 
 	public void consulta() {
@@ -76,7 +76,7 @@ public class Controlador {
 
 	public void Modifica(Elemento e) {
 		DatosElementos de = new DatosElementos();
-		de.Modificar(e);
+		de.ModificarTipoElementos(e);
 
 	}
 
@@ -160,7 +160,7 @@ public class Controlador {
 	}
 
 	public ResultSet ConsultaTodos() {
-		return de.ConsultaTodos();
+		return de.ConsultaTodosTiposElementos();
 	
 	}
 

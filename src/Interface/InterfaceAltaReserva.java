@@ -38,7 +38,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.DropMode;
 
-public class InterfaceReserva extends JInternalFrame {
+public class InterfaceAltaReserva extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfFechayHoraIni;
@@ -58,7 +58,7 @@ public class InterfaceReserva extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfaceReserva frame = new InterfaceReserva();
+					InterfaceAltaReserva frame = new InterfaceAltaReserva();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +68,7 @@ public class InterfaceReserva extends JInternalFrame {
 	}
 
 	
-	public InterfaceReserva() {
+	public InterfaceAltaReserva() {
 		setTitle("Reserva");
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 373);

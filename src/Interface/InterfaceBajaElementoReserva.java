@@ -3,7 +3,7 @@ package Interface;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
@@ -33,7 +33,7 @@ import Datos.DatosReserva;
 
 import javax.swing.event.PopupMenuEvent;
 
-public class InterfaceBajaElementoReserva extends JFrame {
+public class InterfaceBajaElementoReserva extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -63,7 +63,7 @@ public class InterfaceBajaElementoReserva extends JFrame {
 	 */
 	public InterfaceBajaElementoReserva() {
 		setTitle("Baja Elemento Reserva");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 572, 351);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -220,7 +220,9 @@ public class InterfaceBajaElementoReserva extends JFrame {
 	}
 
 	protected void BajaElemento() {
-		
+		DatosElementos de = new DatosElementos();
+		int idelemento=Integer.parseInt(tfIDElemento.getText());
+		de.BajaTipoElemento(idelemento);
 		
 	}
 

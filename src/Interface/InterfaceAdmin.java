@@ -65,13 +65,21 @@ public class InterfaceAdmin extends JFrame {
 		JMenu mnElementosReserva = new JMenu("Elementos Reserva");
 		mnElementos.add(mnElementosReserva);
 		
-		JMenuItem mntmAltaElementoRerserva = new JMenuItem("Alta Elemento Rerserva");
+		JMenuItem mntmAltaElementoRerserva = new JMenuItem("Alta Elemento Reserva");
 		mntmAltaElementoRerserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				showInterfaceAltaElementoReserva();
 			}
 		});
 		mnElementosReserva.add(mntmAltaElementoRerserva);
+		
+		JMenuItem mntmBajaElementoReserva = new JMenuItem("Baja Elemento Reserva");
+		mntmBajaElementoReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowBajaElementoReserva();
+			}
+		});
+		mnElementosReserva.add(mntmBajaElementoReserva);
 		mntmModificarElementos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showInterfceModificacionElementos();
@@ -114,6 +122,13 @@ public class InterfaceAdmin extends JFrame {
 		desktopPane = new JDesktopPane();
 		desktopPane.setBackground(Color.WHITE);
 		contentPane.add(desktopPane, BorderLayout.CENTER);
+	}
+
+	protected void ShowBajaElementoReserva() {
+		InterfaceBajaElementoReserva ib= new InterfaceBajaElementoReserva();
+		desktopPane.add(ib);
+		ib.setVisible(true);
+		
 	}
 
 	protected void showInterfaceAltaElementoReserva() {

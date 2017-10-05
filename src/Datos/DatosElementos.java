@@ -201,4 +201,16 @@ public class DatosElementos {
 		return rs;
 
 	}
+	public void  BajaTipoElemento(int idelemento) {
+		java.sql.PreparedStatement stmt =null;
+		try {
+			stmt=FactoryConexion.getInstancia().getConn().prepareStatement("delete from elementos where IDElementosReserva=?");
+			stmt.setInt(1, idelemento);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }

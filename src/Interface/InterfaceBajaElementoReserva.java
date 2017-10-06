@@ -62,8 +62,11 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InterfaceBajaElementoReserva() {
+		setClosable(true);
+		setMaximizable(true);
+		setIconifiable(true);
 		setTitle("Baja Elemento Reserva");
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 572, 351);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

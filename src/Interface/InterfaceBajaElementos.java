@@ -54,7 +54,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InterfaceBajaElementos() {
-		setTitle("Baja Elementos");
+		setTitle("Baja Tipo Elementos");
 		setMaximizable(true);
 		setClosable(true);
 		setIconifiable(true);
@@ -77,11 +77,11 @@ public class InterfaceBajaElementos extends JInternalFrame {
 			}
 		});
 		
-		JButton btnBuscarTodosLos = new JButton("Buscar Todos los Elementos");
+		JButton btnBuscarTodosLos = new JButton("Buscar Tipos Elementos");
 		btnBuscarTodosLos.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				ConsultarTodosAlta();
+				ConsultarTodosTiposElementos();
 			}
 		});
 		
@@ -123,7 +123,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	protected void ConsultarTodosAlta() {
+	protected void ConsultarTodosTiposElementos() {		
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);

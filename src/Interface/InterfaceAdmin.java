@@ -15,6 +15,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JButton;
 
 public class InterfaceAdmin extends JFrame {
 
@@ -131,6 +132,17 @@ public class InterfaceAdmin extends JFrame {
 		});
 		mnUsuarios.add(mntmBajaUsuarios);
 		mnUsuarios.add(mntmHabilitarinhabilitarUsuarios);
+		
+		JMenu mnReservas = new JMenu("Reservas");
+		menuBar.add(mnReservas);
+		
+		JMenuItem mntmCancelarReservas = new JMenuItem("Cancelar Reservas");
+		mntmCancelarReservas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowCancelarReservas();
+			}
+		});
+		mnReservas.add(mntmCancelarReservas);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -141,6 +153,13 @@ public class InterfaceAdmin extends JFrame {
 		contentPane.add(desktopPane, BorderLayout.CENTER);
 	}
 
+
+	protected void ShowCancelarReservas() {
+		InterfaceCancelarReservas icr= new InterfaceCancelarReservas();
+		desktopPane.add(icr);
+		icr.setVisible(true);
+		
+	}
 
 	protected void ShowModificarElemento() {
 		InterfaceModificarElemento ime= new InterfaceModificarElemento();

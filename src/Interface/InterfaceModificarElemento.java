@@ -58,8 +58,11 @@ public class InterfaceModificarElemento extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public InterfaceModificarElemento() {
+		setMaximizable(true);
+		setIconifiable(true);
+		setClosable(true);
 		setTitle("Modificar Elemento");
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

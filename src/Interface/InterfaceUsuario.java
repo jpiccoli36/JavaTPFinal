@@ -81,6 +81,11 @@ public class InterfaceUsuario extends JFrame {
 		mnReserva.add(mntmReservar);
 		
 		JMenuItem mntmCancelarReserva = new JMenuItem("Cancelar Reserva");
+		mntmCancelarReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ShowCancelarReservaUsuario();
+			}
+		});
 		mnReserva.add(mntmCancelarReserva);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -93,8 +98,17 @@ public class InterfaceUsuario extends JFrame {
 	}
 
 	
+	protected void ShowCancelarReservaUsuario() {
+		InterfaceCancelarReservaUsuarios icr = new InterfaceCancelarReservaUsuarios();
+		desktopPane.add(icr);
+		icr.setVisible(true);
+		
+	}
+
 	protected void ShowConsultarElementos() {
-		// TODO Auto-generated method stub
+		InterfaceConsultarElementos ice = new InterfaceConsultarElementos();
+		desktopPane.add(ice);
+		ice.setVisible(true);
 		
 	}
 

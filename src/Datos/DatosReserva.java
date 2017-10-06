@@ -42,6 +42,55 @@ public class DatosReserva {
 		return rs;
 
 	}
+	public void CancelarReserva(int IDReserva){
+		
+		java.sql.PreparedStatement stmt = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("delete from reservas where idreserva=?");
+			stmt.setInt(1, IDReserva);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	public ResultSet ConsultaTodosReservasUsuario(String user){
+		ResultSet rs=null;
+		java.sql.PreparedStatement stmt = null;
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * "
+					+ "from reservas"
+					+ " where usuario=? and fhinicio>=curdate()");
+			stmt.setString(1, user);
+			rs=stmt.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rs;
+	}
+	public ResultSet ConsultarTodasReservas(){
+		ResultSet rs=null;
+		
+		try {
+			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("select * "
+					+ "from reservas "
+					+ "where fhinicio>=curdate();");
+			return rs;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+		
+		
+	}
 	public ResultSet CantidadMaxReservas(String Tipo){
 		ResultSet rs=null;
 		java.sql.PreparedStatement stmt = null;	

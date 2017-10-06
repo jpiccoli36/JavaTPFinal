@@ -67,6 +67,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 		JLabel lblIDelemento = new JLabel("ID Elemento");
 		
 		tfIDElemento = new JTextField();
+		tfIDElemento.setEnabled(false);
 		tfIDElemento.setColumns(10);
 		
 		JButton btnBaja = new JButton("BAJA");
@@ -119,8 +120,24 @@ public class InterfaceBajaElementos extends JInternalFrame {
 		);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				SelecionarTipo();
+			}
+		});
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
+	}
+
+	protected void SelecionarTipo() {
+		int i = table.getSelectedRow();
+		if(i!=-1){
+			
+			tfIDElemento.setText(table.getValueAt(i, 0).toString());
+			
+		}
+		
 	}
 
 	protected void ConsultarTodosTiposElementos() {		

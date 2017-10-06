@@ -158,12 +158,12 @@ public class InterfaceCancelarReservaUsuarios extends JInternalFrame {
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);		
-		dfm.setColumnIdentifiers(new Object[]{"ID Reserva","Usuario","Elemento ","Tipo Elemento"});				
+		dfm.setColumnIdentifiers(new Object[]{"ID Reserva","Usuario","Elemento ","Tipo Elemento","Detalle"});				
 			
 				if(rs!=null ){
 					try {
 						while(rs.next()){
-							dfm.addRow(new Object[]{(Integer.parseInt(rs.getString("idreserva"))),rs.getString("usuario"),rs.getString("elemento"),rs.getString("tipoelemento")});							
+							dfm.addRow(new Object[]{(Integer.parseInt(rs.getString("idreserva"))),rs.getString("usuario"),rs.getString("elemento"),rs.getString("tipoelemento"),rs.getString("detalle")});							
 							
 						}						
 						

@@ -73,6 +73,7 @@ public class DatosElementos {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 
 			rs = stmt.executeQuery("select DISTINCT NombreElemento from tiposelementos ");
+			return rs;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,9 +94,7 @@ public class DatosElementos {
 		}
 		return rs;
 	}
-	public ResultSet ConsultaID(int id) {
-		return ConsultaIDElementos(id);
-	}
+	
 	public void agregarElementoReserva(Elemento e, Object ob)	
 	{	ResultSet rs= null;
 		java.sql.PreparedStatement stmt = null;

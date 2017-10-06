@@ -37,6 +37,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.DropMode;
+import javax.swing.JTextArea;
+import java.awt.SystemColor;
 
 public class InterfaceAltaReserva extends JInternalFrame {
 
@@ -50,6 +52,7 @@ public class InterfaceAltaReserva extends JInternalFrame {
 	private JLabel lblElemento;
 	private JLabel lblTipoElemento;
 	private JButton btnReservar;
+	private JTextArea taDetalle;
 
 	/**
 	 * Launch the application.
@@ -73,16 +76,17 @@ public class InterfaceAltaReserva extends JInternalFrame {
 		setMaximizable(true);
 		setClosable(true);
 		setTitle("Reserva");
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 373);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		tfFechayHoraIni = new JTextField();
+		tfFechayHoraIni.setBounds(101, 18, 113, 20);
 		tfFechayHoraIni.setColumns(10);
 
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(315, 136, 86, 23);
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -92,13 +96,18 @@ public class InterfaceAltaReserva extends JInternalFrame {
 		});
 
 		JLabel lblFechayHoraIni = new JLabel("Fecha y Hora Inicio");
+		lblFechayHoraIni.setBounds(5, 21, 92, 14);
 
 		JLabel lblFechayHoraFin = new JLabel("Fecha y Hora Fin");
+		lblFechayHoraFin.setBounds(5, 75, 81, 14);
 
 		tfFechayHoraFin = new JTextField();
+		tfFechayHoraFin.setToolTipText("");
+		tfFechayHoraFin.setBounds(101, 72, 114, 20);
 		tfFechayHoraFin.setColumns(10);
 
 		cboxTipos = new JComboBox();
+		cboxTipos.setBounds(5, 110, 102, 20);
 		cboxTipos.addPopupMenuListener(new PopupMenuListener() {
 			public void popupMenuCanceled(PopupMenuEvent arg0) {
 			}
@@ -114,82 +123,42 @@ public class InterfaceAltaReserva extends JInternalFrame {
 		cboxTipos.setModel(new DefaultComboBoxModel(new String[] { "Tipos Elementos" }));
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(5, 177, 484, 150);
 		
 		tfElemento = new JTextField();
+		tfElemento.setBounds(69, 137, 47, 20);
 		tfElemento.setEditable(false);
 		tfElemento.setColumns(10);
 		
 		tfTipo = new JTextField();
+		tfTipo.setBounds(211, 137, 86, 20);
 		tfTipo.setEditable(false);
 		tfTipo.setColumns(10);
 		
 		lblElemento = new JLabel("Elemento");
+		lblElemento.setBounds(15, 140, 44, 14);
 		
 		lblTipoElemento = new JLabel("Tipo Elemento");
+		lblTipoElemento.setBounds(134, 140, 67, 14);
 		
 		btnReservar = new JButton("Reservar");
+		btnReservar.setBounds(393, 17, 77, 23);
 		btnReservar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ReservarClick();
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 501, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblFechayHoraIni)
-										.addComponent(lblFechayHoraFin))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(tfFechayHoraIni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(tfFechayHoraFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblElemento)
-									.addGap(21)
-									.addComponent(tfElemento, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblTipoElemento)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(tfTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-							.addGap(51)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnReservar)
-								.addComponent(btnBuscar)
-								.addComponent(cboxTipos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(43, Short.MAX_VALUE))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFechayHoraIni)
-						.addComponent(tfFechayHoraIni, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cboxTipos, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFechayHoraFin)
-						.addComponent(tfFechayHoraFin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBuscar))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tfElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblElemento)
-						.addComponent(lblTipoElemento)
-						.addComponent(tfTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnReservar))
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
+		
+		JLabel lblNewLabel = new JLabel("Detalle");
+		lblNewLabel.setBounds(224, 21, 55, 14);
+		
+		taDetalle = new JTextArea();
+		taDetalle.setWrapStyleWord(true);
+		taDetalle.setBackground(SystemColor.window);
+		taDetalle.setLineWrap(true);
+		taDetalle.setBounds(289, 16, 86, 59);
+		taDetalle.setRows(5);
 		
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
@@ -198,9 +167,23 @@ public class InterfaceAltaReserva extends JInternalFrame {
 				Agregar();
 			}
 		});
+		contentPane.setLayout(null);
 		table.setRowSelectionAllowed(false);
 		scrollPane.setViewportView(table);
-		contentPane.setLayout(gl_contentPane);
+		contentPane.add(scrollPane);
+		contentPane.add(lblElemento);
+		contentPane.add(tfElemento);
+		contentPane.add(lblTipoElemento);
+		contentPane.add(tfTipo);
+		contentPane.add(btnBuscar);
+		contentPane.add(cboxTipos);
+		contentPane.add(lblFechayHoraIni);
+		contentPane.add(lblFechayHoraFin);
+		contentPane.add(tfFechayHoraIni);
+		contentPane.add(lblNewLabel);
+		contentPane.add(taDetalle);
+		contentPane.add(btnReservar);
+		contentPane.add(tfFechayHoraFin);
 	}
 
 	protected void ReservarClick() {
@@ -215,6 +198,7 @@ public class InterfaceAltaReserva extends JInternalFrame {
 		try {
 			FechaHoraIni = f.parse(this.tfFechayHoraIni.getText());
 			FechaHoraFin = f.parse(this.tfFechayHoraFin.getText());
+			String detalle=taDetalle.getText();
 		 
 		
 		ResultSet rs=null;
@@ -224,10 +208,10 @@ public class InterfaceAltaReserva extends JInternalFrame {
 			rs.next();			
 			cant=Integer.parseInt(rs.getString("CantidadElementos"));		
 			rs1=dr.ContarReservas(tipo,usuario);
-			rs1.next();
+			rs1.next();			
 			cont=(rs1.getInt(1));			
 			if(cant>cont){
-			dr.ReservarElemento(usuario, FechaHoraIni, FechaHoraFin, elemento, tipo);
+			dr.ReservarElemento(usuario, FechaHoraIni, FechaHoraFin, elemento, tipo,detalle);
 			tfElemento.setText(null);
 			tfTipo.setText(null);
 			tfFechayHoraFin.setText(null);
@@ -340,5 +324,10 @@ public class InterfaceAltaReserva extends JInternalFrame {
 				
 				
 		
+	}
+	private static class __Tmp {
+		private static void __tmp() {
+			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+		}
 	}
 }

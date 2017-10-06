@@ -187,8 +187,9 @@ public class Controlador {
 		
 	}
 
-	public ResultSet ConsultaID(int id) {
-		return de.ConsultaID(id) ;	
+	public ResultSet ConsultarTiposElementos() {
+		return de.ConsultaTodosTipos();	
+		
 	}
 
 

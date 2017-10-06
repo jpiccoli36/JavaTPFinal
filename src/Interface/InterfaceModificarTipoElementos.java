@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
 import Datos.DatosElementos;
@@ -14,6 +15,7 @@ import Entidades.Elemento;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -41,6 +43,9 @@ import java.util.Calendar;
 import java.util.Map;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class InterfaceModificarTipoElementos extends JInternalFrame {
 
@@ -49,7 +54,7 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 	private JTextField tfNombreElemento;
 	private JTextField tfCantidadElemento;
 	private JTextField tfIDElemento;
-	
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -76,7 +81,7 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 		setIconifiable(true);
 		setClosable(true);
 		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 546, 422);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,7 +110,7 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 			}
 		});
 
-		JButton btnBuscar = new JButton("Buscar por ID");
+		JButton btnBuscar = new JButton("Buscar Tipo Elementos");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -113,98 +118,119 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 		btnBuscar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				buscarporID();
+				buscarElemento();
 			}
 		});
 
-		JButton btnBuscarPorNombre = new JButton("Buscar por Nombre");
-		btnBuscarPorNombre.addMouseListener(new MouseAdapter() {
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addGap(19)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCantidadElemento).addComponent(lblNombre).addComponent(lblIdElemento))
+						.addGap(45)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addComponent(
+												tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+										.addComponent(btnModificar).addGap(23))
+								.addGroup(gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addContainerGap(184, Short.MAX_VALUE))))
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createSequentialGroup().addGap(10).addComponent(scrollPane,
+										GroupLayout.PREFERRED_SIZE, 443, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnBuscar))
+						.addContainerGap(57, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup().addContainerGap()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNombre)
+								.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnModificar))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(
+								gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblCantidadElemento)
+										.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(18)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblIdElemento)
+								.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addGap(18).addComponent(btnBuscar).addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(59, Short.MAX_VALUE)));
+
+		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				BuscarporNombre();
+			public void mouseClicked(MouseEvent e) {
+				SeleccionarElemento();
 			}
 		});
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup()
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(31)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addComponent(lblNombre)
-										.addComponent(lblCantidadElemento).addComponent(lblIdElemento))
-								.addGap(33)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(tfNombreElemento, GroupLayout.PREFERRED_SIZE,
-												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup().addGap(45).addComponent(btnModificar)
-								.addGap(44).addComponent(btnBuscar).addGap(18).addComponent(btnBuscarPorNombre)))
-				.addContainerGap(56, Short.MAX_VALUE)));
-		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
-				.createSequentialGroup().addGap(42)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblNombre).addComponent(
-						tfNombreElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-						GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblCantidadElemento)
-						.addComponent(tfCantidadElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE))
-				.addGap(18)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(lblIdElemento)
-						.addComponent(tfIDElemento, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-								GroupLayout.PREFERRED_SIZE))
-				.addGap(43)
-				.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE).addComponent(btnModificar)
-						.addComponent(btnBuscar).addComponent(btnBuscarPorNombre))
-				.addContainerGap(56, Short.MAX_VALUE)));
+		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
 
-	protected void BuscarporNombre() {
-		DatosElementos de = new DatosElementos();
-		Elemento e = new Elemento();
-		String nombre = tfNombreElemento.getText();
-		ResultSet rs = de.ConsultaNombreElementos(nombre);
-		try {
-			rs.next();
-			tfCantidadElemento.setText(rs.getString("CantidadElementos"));
-			tfIDElemento.setText(rs.getString("idElementos"));
+	protected void SeleccionarElemento() {
+		int i = table.getSelectedRow();
+		if (i != -1) {
 
-		} catch (SQLException e1) {
-
-			e1.printStackTrace();
-
+			tfCantidadElemento.setText(table.getValueAt(i, 2).toString());
+			tfNombreElemento.setText(table.getValueAt(i, 1).toString());
+			tfIDElemento.setText(table.getValueAt(i, 0).toString());
 		}
 
 	}
 
-	protected void buscarporID() {
-				
-		Elemento e = new Elemento();		
-			e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
-			int id = Integer.parseInt(tfIDElemento.getText());
-			ResultSet rs = control.ConsultaID(id);
-			try {
-				rs.next();
+	protected void buscarElemento() {
 
-				tfCantidadElemento.setText(rs.getString("CantidadElementos"));
-				tfNombreElemento.setText(rs.getString("NombreElemento"));
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+		Elemento e = new Elemento();
+		DatosElementos de = new DatosElementos();
+
+		ResultSet rs = de.ConsultaTodosTiposElementos();
+		try {
+			DefaultTableModel dfm = new DefaultTableModel();
+			table = this.table;
+			table.setModel(dfm);
+			dfm.setColumnIdentifiers(
+					new Object[] { "ID Tipo Elemento", "Nombre Tipo Elemento", "Cantidad Tipo Elemento" });
+
+			if (rs != null) {
+				try {
+					while (rs.next()) {
+						dfm.addRow(new Object[] { (Integer.parseInt(rs.getString("idElementos"))),
+								(rs.getString("NombreElemento")), rs.getString("CantidadElementos") });
+
+					}
+
+				} catch (SQLException w) {
+
+					w.printStackTrace();
+				}
 			}
+			
+		} catch (Exception w) {
+
+			w.printStackTrace();
 		}
-		
-	
+			}
 
 	protected void modificarclick() {
-		Elemento e= new Elemento();	
+		Elemento e = new Elemento();
+		DatosElementos de = new DatosElementos();
 		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
 		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));
 		e.setNombre_elemento(tfNombreElemento.getText());
-		control.Modifica(e);
-		
-		
+		de.ModificarTipoElementos(e);
+		JOptionPane.showMessageDialog(null, "Se Modifico el Tipo Elemento");
+
 	}
 }

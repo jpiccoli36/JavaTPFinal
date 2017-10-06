@@ -44,7 +44,7 @@ public class InterfaceAdmin extends JFrame {
 	public InterfaceAdmin() {
 		setTitle("Administrador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 622, 431);
+		setBounds(100, 100, 772, 620);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

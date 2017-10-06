@@ -31,7 +31,7 @@ public class InterfaceLogin extends JFrame {
 
 	private JPanel contentPane;
 	private static JTextField tfUsuario;
-	private JTextField tfContraseña;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -66,15 +66,14 @@ public class InterfaceLogin extends JFrame {
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
 		
-		tfContraseña = new JTextField();
-		tfContraseña.setColumns(10);
-		
 		JButton btnLogear = new JButton("Iniciar Sesion");
 		btnLogear.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				logearClick();
 			}
 		});
+		
+		passwordField = new JPasswordField();
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -86,9 +85,9 @@ public class InterfaceLogin extends JFrame {
 								.addComponent(lblUsuario)
 								.addComponent(lblContrasea))
 							.addGap(24)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(tfUsuario)
-								.addComponent(tfContraseña, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+								.addComponent(tfUsuario, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(136)
 							.addComponent(btnLogear)))
@@ -104,7 +103,7 @@ public class InterfaceLogin extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblContrasea)
-						.addComponent(tfContraseña, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 					.addGap(39)
 					.addComponent(btnLogear)
 					.addContainerGap(92, Short.MAX_VALUE))
@@ -116,7 +115,7 @@ public class InterfaceLogin extends JFrame {
 		
 		Controlador ce = new Controlador();
 		String usua=tfUsuario.getText();
-		String contraseña=tfContraseña.getText();
+		String contraseña=passwordField.getText();
 		ResultSet rs=ce.login(usua,contraseña);
 		
 		

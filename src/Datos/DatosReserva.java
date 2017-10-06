@@ -126,18 +126,19 @@ public class DatosReserva {
 		
 		return rs;
 	}
-	public void ReservarElemento(String usuario,Date fechaHoraIni, Date fechaHoraFin, String elemento, String tipo){
+	public void ReservarElemento(String usuario,Date fechaHoraIni, Date fechaHoraFin, String elemento, String tipo,String detalle){
 		java.sql.PreparedStatement stmt = null;
 		ResultSet rs=null;
 		
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into reservas (usuario, fhinicio, fhfin, elemento, tipoelemento) "
-					+ "values (?,?,?,?,?)");
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into reservas (usuario, fhinicio, fhfin, elemento, tipoelemento,detalle) "
+					+ "values (?,?,?,?,?,?)");
 			stmt.setString(1, usuario);
 			stmt.setTimestamp(2, new java.sql.Timestamp(fechaHoraIni.getTime()));
 			stmt.setTimestamp(3, new java.sql.Timestamp(fechaHoraFin.getTime()));
 			stmt.setString(4, elemento);
 			stmt.setString(5, tipo);
+			stmt.setString(6, detalle);
 			stmt.executeUpdate();				
 			
 			

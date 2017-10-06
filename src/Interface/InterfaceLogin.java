@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.PasswordView;
 
 import Controlador.Controlador;
 import Datos.Login;
@@ -23,6 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JPasswordField;
 
 public class InterfaceLogin extends JFrame {
 	
@@ -67,7 +69,7 @@ public class InterfaceLogin extends JFrame {
 		tfContraseña = new JTextField();
 		tfContraseña.setColumns(10);
 		
-		JButton btnLogear = new JButton("Logear");
+		JButton btnLogear = new JButton("Iniciar Sesion");
 		btnLogear.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				logearClick();
@@ -77,18 +79,20 @@ public class InterfaceLogin extends JFrame {
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(37)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnLogear)
 						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(37)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblUsuario)
 								.addComponent(lblContrasea))
 							.addGap(24)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(tfUsuario)
-								.addComponent(tfContraseña, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))))
-					.addContainerGap(213, Short.MAX_VALUE))
+								.addComponent(tfContraseña, GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(136)
+							.addComponent(btnLogear)))
+					.addContainerGap(193, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -101,9 +105,9 @@ public class InterfaceLogin extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblContrasea)
 						.addComponent(tfContraseña, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+					.addGap(39)
 					.addComponent(btnLogear)
-					.addGap(65))
+					.addContainerGap(92, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

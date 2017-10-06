@@ -159,7 +159,7 @@ public class InterfaceCancelarReservas extends JInternalFrame {
 		if(i!=-1){
 			
 			tfIDReserva.setText(table.getValueAt(i, 0).toString());
-			tfUsuario.setText(table.getValueAt(i, 0).toString());
+			tfUsuario.setText(table.getValueAt(i, 1).toString());
 			
 		}
 		

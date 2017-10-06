@@ -51,7 +51,7 @@ public class InterfaceAltaElementos extends JInternalFrame {
 	public InterfaceAltaElementos() {
 		setClosable(true);
 		setIconifiable(true);
-		setTitle("Alta Elementos");
+		setTitle("Alta Tipo Elementos");
 		setMaximizable(true);
 		setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 317, 231);
@@ -59,12 +59,12 @@ public class InterfaceAltaElementos extends JInternalFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblNombreElemento = new JLabel("Nombre Elemento");
+		JLabel lblNombreElemento = new JLabel("Nombre Tipo Elemento");
 		
 		tfNombreElemento = new JTextField();
 		tfNombreElemento.setColumns(10);
 		
-		JLabel lblCantidadElemento = new JLabel("Cantidad Elemento");
+		JLabel lblCantidadElemento = new JLabel("Cantidad Maxima");
 		
 		tfCantidadElemento = new JTextField();
 		tfCantidadElemento.setColumns(10);

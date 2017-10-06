@@ -69,6 +69,9 @@ public class InterfaceAltaReserva extends JInternalFrame {
 
 	
 	public InterfaceAltaReserva() {
+		setIconifiable(true);
+		setMaximizable(true);
+		setClosable(true);
 		setTitle("Reserva");
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 570, 373);

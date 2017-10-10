@@ -74,7 +74,7 @@ public class ABMCTipos {
 		case 2:
 			System.out.println("ingres Nombre Elemento");
 			String n = s.nextLine();
-			ctr.PorNombre(n);
+			//ctr.PorNombre(n);
 			break;
 		case 3:
 			System.out.println("ingrese el id del Elemento");

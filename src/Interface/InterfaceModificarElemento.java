@@ -14,7 +14,9 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosElementos;
+import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.JScrollPane;
@@ -24,6 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -37,6 +40,7 @@ public class InterfaceModificarElemento extends JInternalFrame {
 	private JTextField tfNombreElemento;
 	private JTextField tfTipoElemento;
 	private JComboBox cboxTipos;
+	ControladorElementos cre= new ControladorElementos();
 
 	/**
 	 * Launch the application.
@@ -194,36 +198,24 @@ public class InterfaceModificarElemento extends JInternalFrame {
 
 	protected void BuscarTiposElementos() {
 		
-		ResultSet rs= null;
-		DatosElementos de = new DatosElementos();
+		ArrayList<Elemento> el= new ArrayList<Elemento>();
+		
 		Object TipoEl = cboxTipos.getSelectedItem();
-		rs=de.ConsultaTodosElementos(TipoEl);
+		el=cre.ConsultaTodosElementos(TipoEl);
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);		
-		dfm.setColumnIdentifiers(new Object[]{"ID Elemento","Nombre Elemento","Tipo Elemento"});				
-			
-				if(rs!=null ){
-					try {
-						while(rs.next()){
-							dfm.addRow(new Object[]{(Integer.parseInt(rs.getString("IDElementosReserva"))),rs.getString("NombreElementoReserva"),rs.getString("TipoElemento")});							
-							
-						}						
-						
-					} catch (NumberFormatException e) {
-						
-						e.printStackTrace();
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}					
+		dfm.setColumnIdentifiers(new Object[]{"ID Elemento","Nombre Elemento","Tipo Elemento"});		
+		
+
+		for (int i = 0; i < el.size(); i++) {
+			dfm.addRow(new Object[] { el.get(i).getIdElementosReserva(), el.get(i).getNombreElementoReserva(),
+					el.get(i).getTipoElementoReserva() });
+		}						
 					
 				}
 		
-		
-
-		
-	}
+	
 
 	protected void SeleccionarElemento() {
 		int i = table.getSelectedRow();
@@ -238,26 +230,20 @@ public class InterfaceModificarElemento extends JInternalFrame {
 	}
 
 	protected void AgregarTipoElemento() {
-		Controlador ce = new Controlador();
-		ResultSet rs = ce.AgregarTipos();
+		
+		ArrayList<Elemento> el = new ArrayList<Elemento>();		
+		 el= cre.AgregarTipos();
 
 		cboxTipos.removeAllItems();
 
-		try {
-			while (rs.next()) {
-				try {
 
-					cboxTipos.addItem(rs.getString("NombreElemento"));
-				} catch (SQLException e) {
-
-					e.printStackTrace();
-				}
+		for (int i = 0; i < el.size(); i++) {
+			
+				
+				cboxTipos.addItem(el.get(i).getNombre_elemento());
 			}
-		} catch (SQLException e) {
 
-			e.printStackTrace();
-		}
-		
-		
 	}
+		
+	
 }

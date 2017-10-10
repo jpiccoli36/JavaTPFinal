@@ -6,6 +6,34 @@ public class Elemento {
 	public Elemento() {
 
 	}
+	
+	int idElementosReserva;
+	public int getIdElementosReserva() {
+		return idElementosReserva;
+	}
+
+	public void setIdElementosReserva(int idElementosReserva) {
+		this.idElementosReserva = idElementosReserva;
+	}
+
+	public String getNombreElementoReserva() {
+		return NombreElementoReserva;
+	}
+
+	public void setNombreElementoReserva(String nombreElementoReserva) {
+		NombreElementoReserva = nombreElementoReserva;
+	}
+
+	public String getTipoElementoReserva() {
+		return tipoElementoReserva;
+	}
+
+	public void setTipoElementoReserva(String tipoElementoReserva) {
+		this.tipoElementoReserva = tipoElementoReserva;
+	}
+
+	String NombreElementoReserva;
+	String tipoElementoReserva;
 
 	public Elemento(String nombre, int id, int cantidad) {
 		this.setNombre_elemento(nombre);

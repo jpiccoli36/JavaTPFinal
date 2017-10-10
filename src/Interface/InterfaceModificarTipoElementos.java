@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosElementos;
 import Entidades.Elemento;
 
@@ -39,6 +40,7 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Map;
 import java.awt.event.ActionListener;
@@ -49,7 +51,7 @@ import javax.swing.JTable;
 
 public class InterfaceModificarTipoElementos extends JInternalFrame {
 
-	Controlador control = new Controlador();
+	ControladorElementos cre = new ControladorElementos();
 	private JPanel contentPane;
 	private JTextField tfNombreElemento;
 	private JTextField tfCantidadElemento;
@@ -194,34 +196,28 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 
 		Elemento e = new Elemento();
 		DatosElementos de = new DatosElementos();
+		ArrayList<Elemento> el = cre.ConsultaTodosTiposElementos();
 
-		ResultSet rs = de.ConsultaTodosTiposElementos();
-		try {
+		el = cre.ConsultaTodosTiposElementos();
+		
 			DefaultTableModel dfm = new DefaultTableModel();
 			table = this.table;
 			table.setModel(dfm);
+			el = cre.ConsultaTodosTiposElementos();
+			Object[] id = el.toArray();
 			dfm.setColumnIdentifiers(
 					new Object[] { "ID Tipo Elemento", "Nombre Tipo Elemento", "Cantidad Tipo Elemento" });
+			for (int i = 0; i < el.size(); i++) {
+				dfm.addRow(new Object[] { el.get(i).getId_elemento(), el.get(i).getNombre_elemento(),
+						el.get(i).getCantidad_elemento() });
 
-			if (rs != null) {
-				try {
-					while (rs.next()) {
-						dfm.addRow(new Object[] { (Integer.parseInt(rs.getString("idElementos"))),
-								(rs.getString("NombreElemento")), rs.getString("CantidadElementos") });
+			}
 
-					}
 
-				} catch (SQLException w) {
-
-					w.printStackTrace();
-				}
 			}
 			
-		} catch (Exception w) {
-
-			w.printStackTrace();
-		}
-			}
+		
+			
 
 	protected void modificarclick() {
 		Elemento e = new Elemento();

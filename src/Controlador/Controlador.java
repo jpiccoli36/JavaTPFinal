@@ -38,10 +38,7 @@ public class Controlador {
 
 	}
 
-	public void PorNombre(String n) {
-		de.ConsultaNombreElementos(n);
 
-	}
 
 	public void SelectTodosBD(ArrayList<Elemento> e) {
 		de.ConsultaTodosTiposElementos();
@@ -64,10 +61,7 @@ public class Controlador {
 		de.BajaElementos(s);
 
 	}
-	public ResultSet AgregarTipos(){
-		
-		return de.ConsultaTodosTipos();
-	}
+	
 	public void AgregarElemento(Elemento e, Object tipoEl) {
 		
 		de.agregarElementoReserva(e,tipoEl);
@@ -148,21 +142,10 @@ public class Controlador {
 		}
 	}
 
-	public ResultSet ConsultaIDElementos(int id) {
-		
-		return de.ConsultaIDElementos(id);
 	
-	}
 
-	public ResultSet ConsultaNombreElementos(String nombre) {
-		return de.ConsultaNombreElementos(nombre);
-		
-	}
 
-	public ResultSet ConsultaTodos() {
-		return de.ConsultaTodosTiposElementos();
 	
-	}
 
 	public ResultSet ConsultarEstado(int iD) {
 		System.out.println("controlador");
@@ -187,10 +170,7 @@ public class Controlador {
 		
 	}
 
-	public ResultSet ConsultarTiposElementos() {
-		return de.ConsultaTodosTipos();	
-		
-	}
+	
 
 
 

@@ -18,19 +18,23 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosElementos;
+import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class InterfaceConsultarElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JComboBox cboxTipos;
+	ControladorElementos cre = new ControladorElementos();
 
 	/**
 	 * Launch the application.
@@ -116,53 +120,39 @@ public class InterfaceConsultarElementos extends JInternalFrame {
 
 	protected void BuscarElementos() {
 
-		DatosElementos de = new DatosElementos();
+	
 		Object TipoEl = cboxTipos.getSelectedItem();
-		ResultSet rs = null;
-		rs = de.ConsultaTodosElementos(TipoEl);
+		ArrayList<Elemento> el = cre.ConsultaTodosTiposElementos();
+		el = cre.ConsultaTodosElementos(TipoEl);
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);		
 		dfm.setColumnIdentifiers(new Object[]{"ID Elemento","Nombre Elemento","Tipo Elemento"});				
-			
-				if(rs!=null ){
-					try {
-						while(rs.next()){
-							dfm.addRow(new Object[]{(Integer.parseInt(rs.getString("IDElementosReserva"))),rs.getString("NombreElementoReserva"),rs.getString("TipoElemento")});							
-							
+		Object[] id = el.toArray();
+
+		for (int i = 0; i < el.size(); i++) {
+			dfm.addRow(new Object[] { el.get(i).getIdElementosReserva(), el.get(i).getNombreElementoReserva(),
+					el.get(i).getTipoElementoReserva() });
+		}				
 						}						
 						
-					} catch (NumberFormatException e) {
-						
-						e.printStackTrace();
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}			
+					
 
-	}
-				}
+	
+				
 
 	protected void AgregarTipos() {
-		Controlador ce = new Controlador();
-		ResultSet rs = ce.AgregarTipos();
+		ArrayList<Elemento> el = new ArrayList<Elemento>();	
+		el = cre.AgregarTipos();
 
 		cboxTipos.removeAllItems();
 
-		try {
-			while (rs.next()) {
-				try {
 
-					cboxTipos.addItem(rs.getString("NombreElemento"));
-				} catch (SQLException e) {
-
-					e.printStackTrace();
-				}
+		for (int i = 0; i < el.size(); i++) {
+			
+				
+				cboxTipos.addItem(el.get(i).getNombre_elemento());
 			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
 
 	}
 }

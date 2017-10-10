@@ -23,13 +23,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosElementos;
 import Datos.DatosReserva;
+import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;
 
@@ -41,6 +44,7 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 	private JTextField tfIDElemento;
 	private JComboBox cboxTipoElemento;
 	private JButton btnMostrarElementos;
+	ControladorElementos cre= new ControladorElementos();
 
 	/**
 	 * Launch the application.
@@ -174,11 +178,11 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 	}
 
 	protected void MostrarLista() {
-		ResultSet rs=null;				
 		
-		Object TipoEl = cboxTipoElemento.getSelectedItem();
-		DatosElementos de = new DatosElementos();	
-		rs=de.SeleccionarTiposElementos(TipoEl);
+		ArrayList<Elemento> el=new ArrayList<Elemento>();
+		
+		Object TipoEl = cboxTipoElemento.getSelectedItem();			
+		el=cre.SeleccionarTiposElementos(TipoEl);
 		
 	
 	DefaultTableModel dfm= new DefaultTableModel();	
@@ -187,23 +191,14 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 	dfm.setColumnIdentifiers(new Object[]{"Nombre Elemento","ID Elemento"});
 	
 		
-			if(rs!=null ){
-				
-				try {
-					while(rs.next()){
-						dfm.addRow(new Object[]{(rs.getString("NombreElementoReserva")),rs.getString("IDElementosReserva")});				
+	for (int i = 0; i < el.size(); i++) {
+		dfm.addRow(new Object[] { el.get(i).getNombreElementoReserva(),
+				el.get(i).getIdElementosReserva() });			
 						
 					}						
 					
-				} catch (NumberFormatException e) {
-					
-					e.printStackTrace();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}					
 				
-			}			
+					
 			
 			
 	
@@ -229,26 +224,20 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 		
 	}
 
-	protected void AgregarElementos() {
-		Controlador ce = new Controlador();
-		ResultSet rs = ce.AgregarTipos();
+	protected void AgregarElementos() {		
+		
+
+		ArrayList<Elemento> el = new ArrayList<Elemento>();		
+		 el= cre.AgregarTipos();
 
 		cboxTipoElemento.removeAllItems();
 
-		try {
-			while (rs.next()) {
-				try {
 
-					cboxTipoElemento.addItem(rs.getString("NombreElemento"));
-				} catch (SQLException e) {
-
-					e.printStackTrace();
-				}
+		for (int i = 0; i < el.size(); i++) {
+			
+				
+				cboxTipoElemento.addItem(el.get(i).getNombre_elemento());
 			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
 
 	}
 

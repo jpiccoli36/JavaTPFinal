@@ -19,12 +19,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.PopupMenuListener;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.DefaultComboBoxModel;
@@ -35,6 +37,7 @@ public class InterfaceAltaElementosReserva extends JInternalFrame {
 	private JPanel contentPane;
 	private JComboBox cboxTipos;
 	private JTextField tfNombre;
+	ControladorElementos cre = new ControladorElementos();
 
 	/**
 	 * Launch the application.
@@ -133,26 +136,18 @@ public class InterfaceAltaElementosReserva extends JInternalFrame {
 	}
 
 	protected void AgregarTipos() {
-		Controlador ce = new Controlador();
-		ResultSet rs=ce.AgregarTipos();
+		ArrayList<Elemento> el = new ArrayList<Elemento>();		
 		
+		el=cre.AgregarTipos();		
 		cboxTipos.removeAllItems();		
 				
-		try {
-			while (rs.next())
-			{
-			try {
-				
-				cboxTipos.addItem(rs.getString("NombreElemento"));
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
-			}
-		} catch (SQLException e) {
+		
+		for (int i = 0; i < el.size(); i++) {
 			
-			e.printStackTrace();
-		}
+				
+				cboxTipos.addItem(el.get(i).getNombre_elemento());
+			}
 		
 	}
-}
+	}
+			

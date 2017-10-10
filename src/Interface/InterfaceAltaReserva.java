@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosReserva;
 import Entidades.Elemento;
 import java.sql.Date;
@@ -25,6 +26,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -53,7 +55,7 @@ public class InterfaceAltaReserva extends JInternalFrame {
 	private JLabel lblTipoElemento;
 	private JButton btnReservar;
 	private JTextArea taDetalle;
-
+	ControladorElementos cre = new ControladorElementos();
 	/**
 	 * Launch the application.
 	 */
@@ -256,25 +258,17 @@ public class InterfaceAltaReserva extends JInternalFrame {
 
 
 	protected void AgregarElementos() {
-		Controlador ce = new Controlador();
-		ResultSet rs = ce.AgregarTipos();
+		ArrayList<Elemento> el = new ArrayList<Elemento>();		
+		 el= cre.AgregarTipos();
 
 		cboxTipos.removeAllItems();
 
-		try {
-			while (rs.next()) {
-				try {
 
-					cboxTipos.addItem(rs.getString("NombreElemento"));
-				} catch (SQLException e) {
-
-					e.printStackTrace();
-				}
+		for (int i = 0; i < el.size(); i++) {
+			
+				
+				cboxTipos.addItem(el.get(i).getNombre_elemento());
 			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
 
 	}
 

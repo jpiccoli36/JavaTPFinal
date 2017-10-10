@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Controlador.Controlador;
+import Controlador.ControladorElementos;
 import Datos.DatosElementos;
 import Entidades.Elemento;
 
@@ -20,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -31,7 +33,7 @@ public class InterfaceBajaElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	private JTextField tfIDElemento;
-	private Controlador control = new Controlador();
+	private ControladorElementos cre = new ControladorElementos();
 	private JTable table;
 
 	/**
@@ -142,26 +144,23 @@ public class InterfaceBajaElementos extends JInternalFrame {
 
 	protected void ConsultarTodosTiposElementos() {		
 		DefaultTableModel dfm= new DefaultTableModel();	
+		ArrayList<Elemento> el =cre.ConsultaTodosTiposElementos();
 		table = this.table;
 		table.setModel(dfm);
-		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});
-		DatosElementos da= new DatosElementos();		
-			ResultSet rs=da.ConsultaTodosTiposElementos();
-				if(rs!=null ){
-					try {
-						while(rs.next()){
-							dfm.addRow(new Object[]{Integer.parseInt(rs.getString("idElementos")),rs.getString("NombreElemento"),Integer.parseInt(rs.getString("CantidadElementos"))});
+		dfm.setColumnIdentifiers(new Object[]{"ID","Nombre","Cantidad"});				
+			
+		
+					
+						for (int i=0;i<el.size();i++) {						
+						{							
+							
+							
+							dfm.addRow(new Object[]{el.get(i).getId_elemento(),el.get(i).getNombre_elemento(),el.get(i).getCantidad_elemento()});
 							
 							
 						}
-					} catch (NumberFormatException e) {
-						
-						e.printStackTrace();
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-				}
+						}
+				
 		
 	}
 

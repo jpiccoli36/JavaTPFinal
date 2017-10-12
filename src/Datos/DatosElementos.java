@@ -264,6 +264,8 @@ public class DatosElementos {
 			rs=stmt.executeQuery();
 			rs.next();
 			e.setCantidad_elemento(rs.getInt("CantidadElementos"));
+			rs.close();
+			stmt.close();
 		} catch (SQLException w) {
 			
 			w.printStackTrace();

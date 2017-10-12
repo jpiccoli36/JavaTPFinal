@@ -7,9 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
+
 import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
@@ -159,15 +159,13 @@ public class InterfaceBajaElementos extends JInternalFrame {
 							
 							
 						}
-						}
-				
+						}				
 		
 	}
 
 	protected void clickbaja() {
-		Elemento e = new Elemento();
-		Controlador ce = new Controlador();		
+		Elemento e = new Elemento();				
 		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
-		ce.Baja(e);
+		cre.Baja(e);
 		}
 }

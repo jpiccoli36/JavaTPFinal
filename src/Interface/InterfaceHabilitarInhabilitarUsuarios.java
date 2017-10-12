@@ -7,7 +7,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Datos.DatosUsuarios;
 import Entidades.Persona;
 
@@ -26,10 +26,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle.Control;
 
 public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
-	DatosUsuarios du= new DatosUsuarios();
+	
 
 	private JPanel contentPane;
 	private JTextField tfApellido;
@@ -38,6 +39,7 @@ public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
 	private JTextField tfIDUsuario;
 	private JCheckBox chckbxHabilitado;
 	private JButton btnInhabilitar;
+	ControladorUsuario cru= new ControladorUsuario();
 
 	/**
 	 * Launch the application.
@@ -166,43 +168,37 @@ public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
 	protected void HabilitarUsuario() {
 		Persona p = new Persona();
 		p.setIdUsuario( Integer.parseInt(tfIDUsuario.getText()));				
-		du.HabilitarUsuario(p);
+		cru.HabilitarUsuario(p);
 
 	}
 
 	protected void InhabiltarUsuario() {
 		Persona p = new Persona();
 		p.setIdUsuario(Integer.parseInt(tfIDUsuario.getText()));				
-		du.InhabilitarUsuario(p);	
+		cru.InhabilitarUsuario(p);	
 		
 
 	}
 
 	protected void ShowEstadoUsuario() {		
-		int ID = Integer.parseInt(tfIDUsuario.getText());				
-		ResultSet rs = du.ConsultarEstado(ID);		
+		int ID = Integer.parseInt(tfIDUsuario.getText());
+		Persona p = new Persona();
+		p= cru.ConsultarEstado(ID);
 		
-		try {
-			rs.next();
-		} catch (SQLException e) {						
-		}	
-
-		try {
-			tfNombre.setText(rs.getString("NombreUsuario"));
-			tfApellido.setText(rs.getString("ApellidoUsuario"));
-			if ((rs.getString("habilitado")).equals("habilitado")) {
+		
+		
+			tfNombre.setText(p.getNombre());
+			tfApellido.setText(p.getApellido());
+			if (p.getEstado().equals("habilitado")) {
 				chckbxHabilitado.setSelected(true);
 			} else {
 				chckbxHabilitado.setSelected(false);
 			}
-			if(rs.getString("categoria").equals("admin"))
+			if(p.getEstado().equals("admin"))
 			{
 				btnInhabilitar.setEnabled(false);
 			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 	}	
 	

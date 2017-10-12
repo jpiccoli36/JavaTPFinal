@@ -16,15 +16,18 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import Controlador.Controlador;
-import Datos.DatosElementos;
+import Controlador.ControladorElementos;
+import Controlador.ControladorUsuario;
+
 import Datos.DatosUsuarios;
+import Entidades.Elemento;
 import Entidades.Persona;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -33,7 +36,7 @@ public class InterfaceBajaUsuario extends JInternalFrame {
 	private JPanel contentPane;
 	private JTextField tfIdUsuario;
 	private JTable table;
-	
+	ControladorUsuario cru = new ControladorUsuario();
 	
 	public static void main(String[] args) {
 		
@@ -146,36 +149,28 @@ public class InterfaceBajaUsuario extends JInternalFrame {
 		}
 
 	protected void ConsultarTodosBajausuarios() {
+		ArrayList<Persona> pe = new ArrayList<Persona>();
 		DefaultTableModel dfm= new DefaultTableModel();	
 		table = this.table;
 		table.setModel(dfm);
 		dfm.setColumnIdentifiers(new Object[]{"ID Usuarios","Nombre","Apellido"});
 		DatosUsuarios da= new DatosUsuarios();		
-			ResultSet rs=da.ConsultaTodosUsuarios();
-				if(rs!=null ){
-					try {
-						while(rs.next()){
-							dfm.addRow(new Object[]{Integer.parseInt(rs.getString("IdUsuario")),rs.getString("NombreUsuario"),rs.getString("ApellidoUsuario")});
+			pe=cru.ConsultaTodosUsuarios();
+			for (int i = 0; i < pe.size(); i++) {
+				dfm.addRow(new Object[]{pe.get(i).getIdUsuario(),pe.get(i).getNombre(),pe.get(i).getApellido()});
 														
 						}
-					} catch (NumberFormatException e) {
-						
-						e.printStackTrace();
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}
-				}
+					
 		
 	}
 
 	protected void BajaUsuarioClick() {
-		Controlador ctr = new Controlador();
-		DatosUsuarios du = new DatosUsuarios();
+	
+		
 		Persona p = new Persona();
 		p.setIdUsuario(Integer.parseInt(tfIdUsuario.getText()));
-		du.BajaUsuario(p);
-		//ctr.BajaPersonas(p);
+		
+		cru.BajaPersonas(p);
 		
 		
 	}

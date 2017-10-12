@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.PasswordView;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Datos.Login;
 
 import javax.swing.GroupLayout;
@@ -113,7 +113,7 @@ public class InterfaceLogin extends JFrame {
 
 	protected void logearClick() {
 		
-		Controlador ce = new Controlador();
+		ControladorUsuario ce = new ControladorUsuario();
 		String usua=tfUsuario.getText();
 		String contraseña=passwordField.getText();
 		ResultSet rs=ce.login(usua,contraseña);

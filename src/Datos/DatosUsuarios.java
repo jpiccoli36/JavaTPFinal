@@ -4,11 +4,13 @@ import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import com.mysql.jdbc.PreparedStatement;
 
+import Entidades.Elemento;
 import Entidades.Persona;
 
 public class DatosUsuarios {
@@ -29,7 +31,7 @@ public class DatosUsuarios {
 					stmt.setString(5, p.getContraseña());
 					stmt.setString(6, p.getCategoria());
 
-					if (p.getEstado() == true) {
+					if (p.getEstado() .equals("habilitado")) {
 						stmt.setString(7, "habilitado");
 					} else {
 						stmt.setString(7, "inhabilitado");
@@ -76,33 +78,67 @@ public class DatosUsuarios {
 
 	}
 
-	public ResultSet ConsultaTodosUsuarios() {
+	public ArrayList<Persona> ConsultaTodosUsuarios() {
+		ArrayList<Persona> pe = new ArrayList<Persona>();
 		ResultSet rs = null;
 
 		try {
 			Statement stmt = FactoryConexion.getInstancia().getConn().createStatement();
 
 			rs = stmt.executeQuery("select * from usuarios");
-		} catch (SQLException e) {
+			if (rs != null) {
+				while (rs.next()) {
+					Persona p = new Persona();
+					p.setApellido(rs.getString("ApellidoUsuario"));
+					p.setNombre((rs.getString("NombreUsuario")));
+					p.setCategoria(rs.getString("Categoria"));
+					p.setContraseña(rs.getString("Contraseña"));
+					p.setDNI(rs.getString("DNI"));
+					p.setEstados(rs.getString("habilitado"));
+					p.setIdUsuario(rs.getInt("IdUsuario"));
+					p.setUsuario(rs.getString("Usuario"));
+					
+					pe.add(p);
+
+				}
+		}
+			} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return rs;
+		return pe;
 
 	}
 
-	public ResultSet ConsultarEstado(int id) {		
+	public Persona ConsultarEstado(int id) {	
+			
 		java.sql.PreparedStatement stmt = null;
 		ResultSet rs = null;
+		Persona p = new Persona();
 		try {
 			stmt = FactoryConexion.getInstancia().getConn()
 					.prepareStatement("select * from usuarios where IdUsuario= ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-		} catch (SQLException e) {
+			if (rs != null) {
+				rs.next();					
+					p.setApellido(rs.getString("ApellidoUsuario"));
+					p.setNombre((rs.getString("NombreUsuario")));
+					p.setCategoria(rs.getString("Categoria"));
+					p.setContraseña(rs.getString("Contraseña"));
+					p.setDNI(rs.getString("DNI"));
+					p.setEstados(rs.getString("habilitado"));
+					p.setIdUsuario(rs.getInt("IdUsuario"));
+					p.setUsuario(rs.getString("Usuario"));
+					
+
+				
+			
+		}
+			} catch (SQLException e) {
 
 		}
-		return rs;
+		return p;
 	}
 
 	public void HabilitarUsuario(Persona p) {

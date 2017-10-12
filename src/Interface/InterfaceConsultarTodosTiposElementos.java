@@ -1,57 +1,26 @@
 package Interface;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
-import Controlador.Controlador;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
-import Datos.FactoryConexion;
 import Entidades.Elemento;
-
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.InputStream;
-import java.io.Reader;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.sql.Array;
-import java.sql.Blob;
-import java.sql.Clob;
-import java.sql.Date;
-import java.sql.NClob;
-import java.sql.Ref;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.RowId;
-import java.sql.SQLException;
-import java.sql.SQLWarning;
-import java.sql.SQLXML;
-import java.sql.Statement;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Map;
-
 import javax.swing.JTable;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class InterfaceConsultarTodosTiposElementos extends JInternalFrame {
 
 	private JPanel contentPane;
 	ControladorElementos cre = new ControladorElementos();
-	DatosElementos de = new DatosElementos();
+
 	private JTable table;
 
 	/**
@@ -117,7 +86,6 @@ public class InterfaceConsultarTodosTiposElementos extends JInternalFrame {
 
 		dfm.setColumnIdentifiers(new Object[] { "ID", "Nombre", "Cantidad" });
 		el = cre.ConsultaTodosTiposElementos();
-		Object[] id = el.toArray();
 
 		for (int i = 0; i < el.size(); i++) {
 			dfm.addRow(new Object[] { el.get(i).getId_elemento(), el.get(i).getNombre_elemento(),

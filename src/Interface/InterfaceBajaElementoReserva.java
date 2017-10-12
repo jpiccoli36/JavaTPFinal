@@ -28,10 +28,8 @@ import java.util.ArrayList;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
-import Datos.DatosReserva;
 import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;
@@ -218,9 +216,9 @@ public class InterfaceBajaElementoReserva extends JInternalFrame {
 	}
 
 	protected void BajaElemento() {
-		DatosElementos de = new DatosElementos();
+	
 		int idelemento=Integer.parseInt(tfIDElemento.getText());
-		de.BajaTipoElemento(idelemento);
+		cre.BajaTipoElemento(idelemento);
 		
 	}
 

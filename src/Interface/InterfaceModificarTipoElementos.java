@@ -8,9 +8,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
+
 import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
@@ -195,7 +195,7 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 	protected void buscarElemento() {
 
 		Elemento e = new Elemento();
-		DatosElementos de = new DatosElementos();
+		
 		ArrayList<Elemento> el = cre.ConsultaTodosTiposElementos();
 
 		el = cre.ConsultaTodosTiposElementos();
@@ -221,11 +221,11 @@ public class InterfaceModificarTipoElementos extends JInternalFrame {
 
 	protected void modificarclick() {
 		Elemento e = new Elemento();
-		DatosElementos de = new DatosElementos();
+		
 		e.setId_elemento(Integer.parseInt(tfIDElemento.getText()));
 		e.setCantidad_elemento(Integer.parseInt(tfCantidadElemento.getText()));
 		e.setNombre_elemento(tfNombreElemento.getText());
-		de.ModificarTipoElementos(e);
+		cre.ModificarTipoElementos(e);
 		JOptionPane.showMessageDialog(null, "Se Modifico el Tipo Elemento");
 
 	}

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import com.mysql.jdbc.PreparedStatement;
 
 import Entidades.Elemento;
+import Entidades.Reservas;
 
 public class DatosElementos {
 
@@ -27,6 +28,7 @@ public class DatosElementos {
 					e.setId_elemento(rs.getInt("idElementos"));
 					e.setCantidad_elemento(rs.getInt("CantidadElementos"));
 					e.setNombre_elemento(rs.getString("NombreElemento"));
+					
 					el.add(e);
 
 				}
@@ -250,4 +252,23 @@ public class DatosElementos {
 		}
 
 	}
+	public Elemento CantidadMaxReservas(String Tipo){
+		Elemento e = new Elemento();
+		ResultSet rs=null;
+		java.sql.PreparedStatement stmt = null;	
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select CantidadElementos "
+					+ "from tiposelementos where NombreElemento=?");
+			stmt.setString(1, Tipo);
+			stmt.executeQuery();
+			rs=stmt.executeQuery();
+			rs.next();
+			e.setCantidad_elemento(rs.getInt("CantidadElementos"));
+		} catch (SQLException w) {
+			
+			w.printStackTrace();
+		}
+		
+		return e;
 }
+	}

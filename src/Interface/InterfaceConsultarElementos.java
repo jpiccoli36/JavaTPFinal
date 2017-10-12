@@ -17,9 +17,9 @@ import javax.swing.JTable;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
+
 import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;

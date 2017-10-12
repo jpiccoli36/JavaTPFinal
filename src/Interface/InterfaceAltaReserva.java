@@ -7,10 +7,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosReserva;
+import Controlador.ControladorReservas;
 import Entidades.Elemento;
+import Entidades.Reservas;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -56,6 +58,8 @@ public class InterfaceAltaReserva extends JInternalFrame {
 	private JButton btnReservar;
 	private JTextArea taDetalle;
 	ControladorElementos cre = new ControladorElementos();
+	ControladorReservas crr = new ControladorReservas();
+
 	/**
 	 * Launch the application.
 	 */
@@ -72,7 +76,6 @@ public class InterfaceAltaReserva extends JInternalFrame {
 		});
 	}
 
-	
 	public InterfaceAltaReserva() {
 		setIconifiable(true);
 		setMaximizable(true);
@@ -123,26 +126,26 @@ public class InterfaceAltaReserva extends JInternalFrame {
 			}
 		});
 		cboxTipos.setModel(new DefaultComboBoxModel(new String[] { "Tipos Elementos" }));
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(5, 177, 484, 150);
-		
+
 		tfElemento = new JTextField();
 		tfElemento.setBounds(69, 137, 47, 20);
 		tfElemento.setEditable(false);
 		tfElemento.setColumns(10);
-		
+
 		tfTipo = new JTextField();
 		tfTipo.setBounds(211, 137, 86, 20);
 		tfTipo.setEditable(false);
 		tfTipo.setColumns(10);
-		
+
 		lblElemento = new JLabel("Elemento");
 		lblElemento.setBounds(15, 140, 44, 14);
-		
+
 		lblTipoElemento = new JLabel("Tipo Elemento");
 		lblTipoElemento.setBounds(134, 140, 67, 14);
-		
+
 		btnReservar = new JButton("Reservar");
 		btnReservar.setBounds(393, 17, 77, 23);
 		btnReservar.addMouseListener(new MouseAdapter() {
@@ -151,17 +154,17 @@ public class InterfaceAltaReserva extends JInternalFrame {
 				ReservarClick();
 			}
 		});
-		
+
 		JLabel lblNewLabel = new JLabel("Detalle");
 		lblNewLabel.setBounds(224, 21, 55, 14);
-		
+
 		taDetalle = new JTextArea();
 		taDetalle.setWrapStyleWord(true);
 		taDetalle.setBackground(SystemColor.window);
 		taDetalle.setLineWrap(true);
 		taDetalle.setBounds(289, 16, 86, 59);
 		taDetalle.setRows(5);
-		
+
 		table = new JTable();
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -189,139 +192,100 @@ public class InterfaceAltaReserva extends JInternalFrame {
 	}
 
 	protected void ReservarClick() {
-		SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		String tipo=tfTipo.getText();
-		String usuario=InterfaceLogin.Usuario();
+		Elemento e = new Elemento();
+		Reservas r = new Reservas();
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		String tipo = tfTipo.getText();
+		String usuario = InterfaceLogin.Usuario();
 		int cant;
 		int cont;
-		String elemento=tfElemento.getText();
-		java.util.Date FechaHoraIni;
-		java.util.Date FechaHoraFin;
-		try {
-			FechaHoraIni = f.parse(this.tfFechayHoraIni.getText());
-			FechaHoraFin = f.parse(this.tfFechayHoraFin.getText());
-			String detalle=taDetalle.getText();
-		 
+		String elemento = tfElemento.getText();
+		java.util.Date FechaHoraIni=null;
+		java.util.Date FechaHoraFin=null;
 		
-		ResultSet rs=null;
-		ResultSet rs1=null;
-		DatosReserva dr = new DatosReserva();
-		rs=dr.CantidadMaxReservas(tipo);			
-			rs.next();			
-			cant=Integer.parseInt(rs.getString("CantidadElementos"));		
-			rs1=dr.ContarReservas(tipo,usuario);
-			rs1.next();			
-			cont=(rs1.getInt(1));			
-			if(cant>cont){
-			dr.ReservarElemento(usuario, FechaHoraIni, FechaHoraFin, elemento, tipo,detalle);
-			tfElemento.setText(null);
-			tfTipo.setText(null);
-			tfFechayHoraFin.setText(null);
-			tfFechayHoraIni.setText(null);
-			table.removeAll();
+			try {
+				FechaHoraIni = f.parse(this.tfFechayHoraIni.getText());
+				FechaHoraFin = f.parse(this.tfFechayHoraFin.getText());
+			} catch (ParseException e1) {
+				
+				e1.printStackTrace();
+			}
+			String detalle = taDetalle.getText();	
+			
+			e=cre.CantidadMaxReservas(tipo);
+			
+			cant = e.getCantidad_elemento();
+			r = crr.ContarReservas(tipo, usuario);
+		
+			cont = (r.getCantidadReservas());
+			if (cant > cont) {
+				crr.ReservarElemento(usuario, FechaHoraIni, FechaHoraFin, elemento, tipo, detalle);
+				tfElemento.setText(null);
+				tfTipo.setText(null);
+				tfFechayHoraFin.setText(null);
+				tfFechayHoraIni.setText(null);
+				table.removeAll();
 			}
 			}
-			
-		
-		 catch (NumberFormatException e) {
-			
-			e.printStackTrace();
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		}
-		
-		
-		
-		
-	
 
-
-	protected void Agregar() {	
+	protected void Agregar() {
 		int i = table.getSelectedRow();
-		if(i!=-1){
-			
+		if (i != -1) {
+
 			tfElemento.setText(table.getValueAt(i, 0).toString());
 			tfTipo.setText(table.getValueAt(i, 1).toString());
 		}
-		
+
 	}
 
-
 	protected void AgregarElementos() {
-		ArrayList<Elemento> el = new ArrayList<Elemento>();		
-		 el= cre.AgregarTipos();
+		ArrayList<Elemento> el = new ArrayList<Elemento>();
+		el = cre.AgregarTipos();
 
 		cboxTipos.removeAllItems();
 
-
 		for (int i = 0; i < el.size(); i++) {
-			
-				
-				cboxTipos.addItem(el.get(i).getNombre_elemento());
-			}
+
+			cboxTipos.addItem(el.get(i).getNombre_elemento());
+		}
 
 	}
 
-	protected void ShowBuscar() {		
-		
-		ResultSet rs=null;
-		SimpleDateFormat f= new SimpleDateFormat("dd/MM/yyyy HH:mm");
+	protected void ShowBuscar() {
+
+		ArrayList<Reservas> re = new ArrayList<Reservas>();
+		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		try {
 
-			java.util.Date FechaHoraIni=f.parse(this.tfFechayHoraIni.getText());
-			java.util.Date FechaHoraFin =f.parse(this.tfFechayHoraFin.getText());
-					
-			
-			Object TipoEl = cboxTipos.getSelectedItem();
-			DatosReserva dr = new DatosReserva();
-			
-			rs=dr.ConsultaElementosDisponibles(FechaHoraIni,FechaHoraFin,TipoEl);
+			java.util.Date FechaHoraIni = f.parse(this.tfFechayHoraIni.getText());
+			java.util.Date FechaHoraFin = f.parse(this.tfFechayHoraFin.getText());
 
-		} catch (ParseException e){
+			Object TipoEl = cboxTipos.getSelectedItem();
+
+			re=crr.ConsultaElementosDisponibles(FechaHoraIni, FechaHoraFin, TipoEl);
+
+		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Falta una fecha y hora");
 
 		}
-		DefaultTableModel dfm= new DefaultTableModel();	
-		table = this.table;
-		table.setModel(dfm);		
-		dfm.setColumnIdentifiers(new Object[]{"Elementos Disponibles","Tipo Elemento"});				
+		DefaultTableModel dfm = new DefaultTableModel();
+	
+		table.setModel(dfm);
+		dfm.setColumnIdentifiers(new Object[] { "Elementos Disponibles", "Tipo Elemento" });
+
+		for (int i=0;i<re.size();i++) {						
+			{							
+				
+				
+				dfm.addRow(new Object[]{re.get(i).getElemento(),re.get(i).getTipoElemento(),});
+				
+				
+			}			
+
 			
-				if(rs!=null ){
-					try {
-						while(rs.next()){
-							dfm.addRow(new Object[]{(rs.getString("NombreElementoReserva")),rs.getString("TipoElemento")});							
-							
-						}						
-						
-					} catch (NumberFormatException e) {
-						
-						e.printStackTrace();
-					} catch (SQLException e) {
-						
-						e.printStackTrace();
-					}					
-					
-				}
-			
-				
-				
-				
-				
-		
-	}
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
+
 		}
+
 	}
+
 }

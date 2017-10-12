@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import Datos.DatosReserva;
+import Controlador.ControladorReservas;
+import Entidades.Reservas;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,6 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class InterfaceCancelarReservas extends JInternalFrame {
 
@@ -30,6 +32,7 @@ public class InterfaceCancelarReservas extends JInternalFrame {
 	private JTextField tfIDReserva;
 	private JTextField tfUsuario;
 	private JTable table;
+	ControladorReservas crr= new ControladorReservas();
 
 	/**
 	 * Launch the application.
@@ -166,37 +169,29 @@ public class InterfaceCancelarReservas extends JInternalFrame {
 	}
 
 	protected void BuscarReserva() {
-	DatosReserva dr = new DatosReserva();
+		ArrayList<Reservas> re = new ArrayList<Reservas>();
 	ResultSet rs=null;				
-	rs=dr.ConsultarTodasReservas();	
+	re=crr.ConsultarTodasReservas();	
 	DefaultTableModel dfm= new DefaultTableModel();	
 	table = this.table;
 	table.setModel(dfm);		
 	dfm.setColumnIdentifiers(new Object[]{"ID Reserva","Usuario","Elemento ","Tipo Elemento"});				
 		
-			if(rs!=null ){
-				try {
-					while(rs.next()){
-						dfm.addRow(new Object[]{(Integer.parseInt(rs.getString("idreserva"))),rs.getString("usuario"),rs.getString("elemento"),rs.getString("tipoelemento")});							
-						
-					}						
-					
-				} catch (NumberFormatException e) {
-					
-					e.printStackTrace();
-				} catch (SQLException e) {
-					
-					e.printStackTrace();
-				}			
+	for (int i=0;i<re.size();i++) {						
+		{
+			dfm.addRow(new Object[]{re.get(i).getIdreservas(),re.get(i).getUsuario(),re.get(i).getElemento(),re.get(i).getTipoElemento(),});
+			
+			
+		}					
 	
 }
 }	
 	
 
 	protected void CancelarReserva() {
-		DatosReserva dr = new DatosReserva();
-		int idRerserva=Integer.parseInt(tfIDReserva.getText());
-		dr.CancelarReserva(idRerserva);
+		
+		int idReserva=Integer.parseInt(tfIDReserva.getText());
+		crr.CancelarReserva(idReserva);
 		JOptionPane.showMessageDialog(null, "Reserva Cancelada");
 		
 		

@@ -7,7 +7,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Entidades.Persona;
 
 import javax.swing.GroupLayout;
@@ -38,6 +38,7 @@ public class InterfaceAltaUsuario extends JInternalFrame {
 	private JTextField tfContraseñaUsuario;
 	private JCheckBox chckbxHabilitado;
 	private JComboBox cbcategoria;
+	ControladorUsuario cru= new ControladorUsuario();
 
 	/**
 	 * Launch the application.
@@ -207,10 +208,9 @@ public class InterfaceAltaUsuario extends JInternalFrame {
 					else{
 						p.setCategoria("encargado");
 					}
-				}
+				}				
 				
-				Controlador control = new Controlador();
-				control.AltaPersona(p);
+				cru.AltaPersona(p);
 				
 	}
 }

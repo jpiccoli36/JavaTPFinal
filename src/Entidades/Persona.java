@@ -11,8 +11,21 @@ public class Persona {
 	String usuario;
 	String Categoria;
 	Boolean Estado;
+	String Estados;
 	
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getEstados() {
+		return Estados;
+	}
+	public void setEstados(String estados) {
+		Estados = estados;
+	}
 	public Boolean getEstado() {
 		return Estado;
 	}

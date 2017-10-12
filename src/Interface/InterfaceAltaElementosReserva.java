@@ -7,7 +7,6 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Datos.DatosElementos;
 import Entidades.Elemento;
 
 import javax.swing.GroupLayout;
@@ -25,7 +24,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.event.PopupMenuListener;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
 
 import javax.swing.event.PopupMenuEvent;
@@ -127,11 +126,11 @@ public class InterfaceAltaElementosReserva extends JInternalFrame {
 	
 
 	protected void AgregarElemento() {
-		Controlador ce = new Controlador();
+		
 		Elemento e = new Elemento();		
 		e.setNombre_elemento(tfNombre.getText());
 		Object TipoEl = cboxTipos.getSelectedItem();
-		ce.AgregarElemento(e, TipoEl);
+		cre.AgregarElemento(e, TipoEl);
 		
 	}
 

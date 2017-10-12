@@ -13,9 +13,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 
-import Controlador.Controlador;
+import Controlador.ControladorUsuario;
 import Controlador.ControladorElementos;
-import Datos.DatosElementos;
 import Entidades.Elemento;
 
 import javax.swing.event.PopupMenuEvent;
@@ -189,9 +188,8 @@ public class InterfaceModificarElemento extends JInternalFrame {
 	protected void ModificarElemento() {
 		int id= Integer.parseInt(tfIDElemento.getText());
 		String nombre= tfNombreElemento.getText();
-		String tipo= tfTipoElemento.getText();
-		DatosElementos de = new DatosElementos();
-		de.ModificarElemento(id, nombre, tipo);
+		String tipo= tfTipoElemento.getText();		
+		cre.ModificarElemento(id, nombre, tipo);
 		
 		
 	}

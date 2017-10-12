@@ -17,43 +17,43 @@ public class DatosUsuarios {
 	public void AltaUsuario(Persona p) {
 		int b = 0;
 		java.sql.PreparedStatement stmt = null;
-	
-		ResultSet rs = null;		
-						
-				try{
-					stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-							"insert  into usuarios(NombreUsuario,ApellidoUsuario,DNI,Usuario,Contraseña,Categoria,habilitado) values  (?,?,?,?,?,?,? )  ",
-							PreparedStatement.RETURN_GENERATED_KEYS);
-					stmt.setString(1, p.getNombre());
-					stmt.setString(2, p.getApellido());
-					stmt.setString(3, p.getDNI());
-					stmt.setString(4, p.getUsuario());
-					stmt.setString(5, p.getContraseña());
-					stmt.setString(6, p.getCategoria());
 
-					if (p.getEstado() .equals("habilitado")) {
-						stmt.setString(7, "habilitado");
-					} else {
-						stmt.setString(7, "inhabilitado");
-					}
+		ResultSet rs = null;
 
-					stmt.executeUpdate();
+		try {
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
+					"insert  into usuarios(NombreUsuario,ApellidoUsuario,DNI,Usuario,Contraseña,Categoria,habilitado) values  (?,?,?,?,?,?,? )  ",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, p.getNombre());
+			stmt.setString(2, p.getApellido());
+			stmt.setString(3, p.getDNI());
+			stmt.setString(4, p.getUsuario());
+			stmt.setString(5, p.getContraseña());
+			stmt.setString(6, p.getCategoria());
 
-					rs = stmt.getGeneratedKeys();
-					if (rs != null && rs.next()) {
-						p.setIdUsuario(rs.getInt(1));
-					}
-					JOptionPane.showMessageDialog(null, "Usuario Agregado");
-					
-				}	
-				catch(SQLException s)
-				{
-					s.printStackTrace();
-					
-				}}
-				
-			
+			if (p.getEstado().equals("habilitado")) {
+				stmt.setString(7, "habilitado");
+			} else {
+				stmt.setString(7, "inhabilitado");
+			}
+
+			stmt.executeUpdate();
+
+			rs = stmt.getGeneratedKeys();
+			if (rs != null && rs.next()) {
+				p.setIdUsuario(rs.getInt(1));
+			}
+			JOptionPane.showMessageDialog(null, "Usuario Agregado");
+			rs.close();
+			stmt.close();
+
+		} catch (SQLException s) {
+			s.printStackTrace();
+
+		}
 		
+	}
+
 	public void BajaUsuario(Persona p) {
 
 		java.sql.PreparedStatement stmt = null;
@@ -97,12 +97,15 @@ public class DatosUsuarios {
 					p.setEstados(rs.getString("habilitado"));
 					p.setIdUsuario(rs.getInt("IdUsuario"));
 					p.setUsuario(rs.getString("Usuario"));
-					
+
 					pe.add(p);
 
 				}
-		}
-			} catch (SQLException e) {
+			}
+			rs.close();
+			stmt.close();
+			
+		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
@@ -110,8 +113,8 @@ public class DatosUsuarios {
 
 	}
 
-	public Persona ConsultarEstado(int id) {	
-			
+	public Persona ConsultarEstado(int id) {
+
 		java.sql.PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Persona p = new Persona();
@@ -121,21 +124,20 @@ public class DatosUsuarios {
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if (rs != null) {
-				rs.next();					
-					p.setApellido(rs.getString("ApellidoUsuario"));
-					p.setNombre((rs.getString("NombreUsuario")));
-					p.setCategoria(rs.getString("Categoria"));
-					p.setContraseña(rs.getString("Contraseña"));
-					p.setDNI(rs.getString("DNI"));
-					p.setEstados(rs.getString("habilitado"));
-					p.setIdUsuario(rs.getInt("IdUsuario"));
-					p.setUsuario(rs.getString("Usuario"));
-					
+				rs.next();
+				p.setApellido(rs.getString("ApellidoUsuario"));
+				p.setNombre((rs.getString("NombreUsuario")));
+				p.setCategoria(rs.getString("Categoria"));
+				p.setContraseña(rs.getString("Contraseña"));
+				p.setDNI(rs.getString("DNI"));
+				p.setEstados(rs.getString("habilitado"));
+				p.setIdUsuario(rs.getInt("IdUsuario"));
+				p.setUsuario(rs.getString("Usuario"));
 
-				
-			
-		}
-			} catch (SQLException e) {
+			}
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
 
 		}
 		return p;
@@ -149,6 +151,8 @@ public class DatosUsuarios {
 			stmt.setInt(2, p.getIdUsuario());
 			stmt.setString(1, "habilitado");
 			stmt.executeUpdate();
+			
+			stmt.close();
 
 		} catch (SQLException e1) {
 
@@ -166,6 +170,8 @@ public class DatosUsuarios {
 			stmt.setInt(2, p.getIdUsuario());
 			stmt.setString(1, "inhabilitado");
 			stmt.executeUpdate();
+			
+			stmt.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();

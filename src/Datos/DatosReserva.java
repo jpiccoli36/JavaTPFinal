@@ -47,6 +47,8 @@ public class DatosReserva {
 				
 				
 			}
+			rs.close();
+			stmt.close();
 			}	
 		
 		
@@ -64,6 +66,8 @@ public class DatosReserva {
 			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("delete from reservas where idreserva=?");
 			stmt.setInt(1, IDReserva);
 			stmt.executeUpdate();
+			
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,6 +97,8 @@ public class DatosReserva {
 					re.add(r);		
 				}
 			}
+			rs.close();
+			stmt.close();
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,6 +126,8 @@ public class DatosReserva {
 				}
 			
 		} 
+			rs.close();
+			stmt.close();
 			}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -183,18 +183,18 @@ public class InterfaceHabilitarInhabilitarUsuarios extends JInternalFrame {
 	protected void ShowEstadoUsuario() {		
 		int ID = Integer.parseInt(tfIDUsuario.getText());
 		Persona p = new Persona();
-		p= cru.ConsultarEstado(ID);
+		p=cru.ConsultarEstado(ID);
 		
 		
 		
 			tfNombre.setText(p.getNombre());
 			tfApellido.setText(p.getApellido());
-			if (p.getEstado().equals("habilitado")) {
+			if (p.getEstados().equals("habilitado")) {
 				chckbxHabilitado.setSelected(true);
 			} else {
 				chckbxHabilitado.setSelected(false);
 			}
-			if(p.getEstado().equals("admin"))
+			if(p.getEstados().equals("admin"))
 			{
 				btnInhabilitar.setEnabled(false);
 			}

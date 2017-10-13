@@ -49,7 +49,7 @@ public void ModificarElemento(int id, String nombre, String tipo) {
 	
 }
 public void ModificarTipoElementos(Elemento e) {
-	ModificarTipoElementos(e);
+	de.ModificarTipoElementos(e);
 	
 }
 public Elemento CantidadMaxReservas(String tipo) {

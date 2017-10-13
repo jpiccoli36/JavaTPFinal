@@ -14,27 +14,21 @@ public class ControladorUsuario {
 	private DatosUsuarios du;
 
 	Scanner w = new Scanner(System.in);
-	private ArrayList<Elemento> el = new ArrayList<Elemento>();
-	private ArrayList<Persona> pe = new ArrayList<Persona>();
+	
 
 	public ControladorUsuario() {
-		pe.add(new Persona("jose", "piccoli", "123123", 1));
-		pe.add(new Persona("analia", "salazar", "123321", 2));
-
+		
+		du = new DatosUsuarios();
 	}
 
 	public ArrayList<Persona> ConsultaTodosUsuarios() {
 		return du.ConsultaTodosUsuarios();
 	}
 
-	public void Modifica(Elemento e) {
-		DatosElementos de = new DatosElementos();
-		de.ModificarTipoElementos(e);
-
-	}
+	
 
 	public void AltaPersona(Persona p) {
-		du = new DatosUsuarios();
+		
 		du.AltaUsuario(p);
 
 	}
@@ -45,7 +39,7 @@ public class ControladorUsuario {
 	}
 
 	public Persona ConsultarEstado(int iD) {
-
+		
 		return du.ConsultarEstado(iD);
 
 	}

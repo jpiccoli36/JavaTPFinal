@@ -31,7 +31,7 @@ public class DatosUsuarios {
 			stmt.setString(5, p.getContraseña());
 			stmt.setString(6, p.getCategoria());
 
-			if (p.getEstado().equals("habilitado")) {
+			if (p.getEstados().equals("habilitado")) {
 				stmt.setString(7, "habilitado");
 			} else {
 				stmt.setString(7, "inhabilitado");
@@ -123,7 +123,7 @@ public class DatosUsuarios {
 					.prepareStatement("select * from usuarios where IdUsuario= ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			if (rs != null) {
+			if (rs != null) {				
 				rs.next();
 				p.setApellido(rs.getString("ApellidoUsuario"));
 				p.setNombre((rs.getString("NombreUsuario")));

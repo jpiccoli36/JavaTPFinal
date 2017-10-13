@@ -195,8 +195,15 @@ public class InterfaceAltaUsuario extends JInternalFrame {
 				p.setNombre(tfNombreUsuario.getText());
 				p.setUsuario(tfUsuario.getText());
 				p.setContraseña(tfContraseñaUsuario.getText());
-				p.setDNI(tfDNIUsuario.getText());				
-				p.setEstado(chckbxHabilitado.isSelected());
+				p.setDNI(tfDNIUsuario.getText());
+				if(chckbxHabilitado.isSelected())
+				{
+					p.setEstados("habilitado");
+				}
+				else{
+					p.setEstados("inhabilitado");
+				}
+				
 				if(cbcategoria.getSelectedIndex()==0){
 					p.setCategoria("user");
 					

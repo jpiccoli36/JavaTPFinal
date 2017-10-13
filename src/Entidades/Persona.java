@@ -10,7 +10,7 @@ public class Persona {
 	String nombre;
 	String usuario;
 	String Categoria;
-	Boolean Estado;
+	
 	String Estados;
 	
 
@@ -26,12 +26,7 @@ public class Persona {
 	public void setEstados(String estados) {
 		Estados = estados;
 	}
-	public Boolean getEstado() {
-		return Estado;
-	}
-	public void setEstado(Boolean estado) {
-		Estado = estado;
-	}
+	
 	public String getCategoria() {
 		return Categoria;
 	}
